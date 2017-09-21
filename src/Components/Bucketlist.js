@@ -44,9 +44,12 @@ class Bucketlist extends Component{
 		} else {
 			return (
 				<ul className="list-group">
-				  <li className="list-group-item">First Item</li>
-				  <li className="list-group-item">Second item</li>
-				  <li className="list-group-item">Third Item</li>
+					{this.props.bucketlists.map(function(bucketlist) {
+					   return (
+					   	<li key={bucketlist.id}
+					   			className="list-group-item"
+					   	>{bucketlist.name}</li>);
+					})}
 				</ul>
 			);
 		}
