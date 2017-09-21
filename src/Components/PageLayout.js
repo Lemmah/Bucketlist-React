@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import RegistrationForm from './RegistrationForm'
 import axios from 'axios'
+import Bucketlist from './Bucketlist'
 
 const api_url="http://localhost:5000"
 
@@ -45,6 +46,9 @@ class PageLayout extends Component{
 		})
     .then((response) => {
       console.log(response.data.message);
+      this.setState({
+      	bucketlists: response.data.message
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -56,8 +60,12 @@ class PageLayout extends Component{
 			console.log("authenticated")
 			return (
 				<Row>
-		      <Col xs={12} md={8}>Authenticated</Col>
-		      <Col xs={12} md={4}>...</Col>
+		      <Col xs={12} md={4}>
+		      	<Bucketlist 
+		      		bucketlists={this.state.bucketlists}
+		      	/>
+		      </Col>
+		      <Col xs={12} md={8}>...</Col>
 		    </Row>
 			);
 		} else {
