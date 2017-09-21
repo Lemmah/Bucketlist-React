@@ -72,11 +72,13 @@ class App extends Component {
 		  		loginError={this.state.loginError}
 		  		onLogout={this.handleLogout.bind(this)}
 		  	/>
-		  	<PageLayout 
-		  		authenticated={this.state.authenticated}
-		  		onRegister={this.handleRegister.bind(this)}
-		  		registrationError={this.state.registrationError}
-		  	/>
+		  	<div className="container">
+			  	<PageLayout 
+			  		authenticated={this.state.authenticated}
+			  		onRegister={this.handleRegister.bind(this)}
+			  		registrationError={this.state.registrationError}
+			  	/>
+		  	</div>
 		  	<Footer />
 		  </div>
 		);
