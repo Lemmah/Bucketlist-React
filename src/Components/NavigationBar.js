@@ -146,10 +146,5 @@ class NavigationBar extends Component{
 }
 
 
-function openInNewTab(url) {
-  var win = window.open(url, '_blank');
-  win.focus();
-}
-
 
 export default NavigationBar;
