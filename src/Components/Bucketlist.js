@@ -20,22 +20,39 @@ class Bucketlist extends Component{
 				</ul>
 			);
 		} else {
-			return (
-				<ul className="list-group"> 
-						<strong>
-							<center>
-								Your Bucketlists
-							</center>
-						</strong>
-					{this.props.bucketlists.map((bucketlist) => {
-					   return (
-					   	<li onClick={this.displayItems.bind(this, bucketlist)} 
-					   			key={bucketlist.id}
-					   			className="list-group-item bucketlist"
-					   	>{bucketlist.name}</li>);
-					})}
-				</ul>
-			);
+			if(this.props.bucketlists.length > 0){
+				return (
+					<ul className="list-group"> 
+							<strong>
+								<center>
+									Your Bucketlists
+								</center>
+							</strong>
+						{this.props.bucketlists.map((bucketlist) => {
+						   return (
+						   	<li onClick={this.displayItems.bind(this, bucketlist)} 
+						   			key={bucketlist.id}
+						   			className="list-group-item bucketlist"
+						   	>{bucketlist.name}</li>);
+						})}
+					</ul>
+				);
+			} else {
+				return(
+					<ul className="list-group">
+					  <strong>
+								<center>
+									Your Bucketlists
+								</center>
+							</strong>
+						<li className="list-group-item"></li>
+					  <li className="list-group-item">
+					  	There are no Bucketlists here.
+					  </li>
+					  <li className="list-group-item"></li>
+					</ul>
+				);	
+			}
 		}
 	}
 
