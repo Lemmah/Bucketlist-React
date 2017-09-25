@@ -10,6 +10,7 @@ class PageLayout extends Component{
 	constructor(){
 		super();
 		this.state = {
+			token: null,
 			username: null,
 			bucketlists: null,
 		}
@@ -30,6 +31,7 @@ class PageLayout extends Component{
 				const token = nextProps.authenticated.message.access_token;
 				this.setState({
 					username: nextProps.authenticated.message.user,
+					token: token,
 				});
 				this.getAllBucketlists(token);
 				console.log("Changed")
@@ -63,6 +65,7 @@ class PageLayout extends Component{
 		      <Col xs={12} md={4}>
 		      	<Bucketlist 
 		      		bucketlists={this.state.bucketlists}
+		      		token={this.state.token}
 		      	/>
 		      </Col>
 		      <Col xs={12} md={8}>...</Col>

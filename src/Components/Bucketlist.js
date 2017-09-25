@@ -11,14 +11,10 @@ class Bucketlist extends Component{
 		}
 	}
 
-	componentWillReceiveProps(nextProps){
-		console.log("Receives Props");
-	}
-
-	getAllBucketlistItems(token, bucketlistId){
-		axios.get(api_url + "/bucketlists/" + bucketlistId, {
+	getAllBucketlistItems(bucketlistId){
+		axios.get(api_url + "/bucketlists/" + bucketlistId + "/items", {
 			headers: {
-				'Authorization': 'Bearer ' + token,
+				'Authorization': 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json',
 			}
 		})
@@ -26,8 +22,13 @@ class Bucketlist extends Component{
       console.log(response.data.message);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error.response.data.error);
     });
+	}
+
+	displayItems(id){
+		console.log(id);
+		this.getAllBucketlistItems(id);
 	}
 
 	displayBucketlists(){
@@ -44,9 +45,10 @@ class Bucketlist extends Component{
 		} else {
 			return (
 				<ul className="list-group">
-					{this.props.bucketlists.map(function(bucketlist) {
+					{this.props.bucketlists.map((bucketlist) => {
 					   return (
-					   	<li key={bucketlist.id}
+					   	<li onClick={this.displayItems.bind(this, bucketlist.id)} 
+					   			key={bucketlist.id}
 					   			className="list-group-item"
 					   	>{bucketlist.name}</li>);
 					})}
