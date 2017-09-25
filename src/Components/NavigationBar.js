@@ -6,10 +6,6 @@ import FaGithub from 'react-icons/lib/fa/github'
 
 
 class NavigationBar extends Component{
-  constructor(props){
-    super(props);
-    this.state = {}
-  }
 
   loginUser(event){
     const credentials = {
