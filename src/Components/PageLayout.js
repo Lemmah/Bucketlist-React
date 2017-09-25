@@ -3,8 +3,10 @@ import { Grid, Row, Col, Image } from 'react-bootstrap'
 import RegistrationForm from './RegistrationForm'
 import axios from 'axios'
 import Bucketlist from './Bucketlist'
+import BucketlistItem from './BucketlistItem'
 
 const api_url="http://localhost:5000"
+
 
 class PageLayout extends Component{
 	constructor(){
@@ -13,8 +15,10 @@ class PageLayout extends Component{
 			token: null,
 			username: null,
 			bucketlists: null,
+			bucketlistItems: null,
+			bucketlistOnFocus: null,
 		}
-	}
+	} 
 
 	registerUser(credentials){
     this.props.onRegister(credentials);
@@ -39,6 +43,21 @@ class PageLayout extends Component{
 		}
 	}
 
+	componentDidUpdate(prevProps, prevState){
+		console.log(prevState.bucketlists);
+		console.log(this.state.bucketlists);
+		if(this.state.bucketlists){
+			if(this.state.bucketlists.length > 0){
+				console.log("Bucketlists Present")
+				if(!prevState.bucketlists){
+					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
+					console.log("Bucketlists Change")
+					firstBucketlist.click();
+				}
+			}
+		}
+	}
+
 	getAllBucketlists(token){
 		axios.get(api_url + "/bucketlists", {
 			headers: {
@@ -47,28 +66,53 @@ class PageLayout extends Component{
 			}
 		})
     .then((response) => {
-      console.log(response.data.message);
       this.setState({
       	bucketlists: response.data.message
       });
+      console.log(response.data.message);
     })
     .catch((error) => {
       console.log(error);
     });
 	}
 
+	getAllBucketlistItems(bucketlist){
+		axios.get(api_url + "/bucketlists/" + bucketlist.id + "/items", {
+			headers: {
+				'Authorization': 'Bearer ' + this.state.token,
+				'Content-Type': 'application/json',
+			}
+		})
+    .then((response) => {
+			this.setState({
+      	bucketlistItems: response.data.message,
+      	bucketlistOnFocus: bucketlist.name,
+      });
+      console.log("Items reacieved: ",response.data.message);
+    })
+    .catch((error) => {
+      console.log(error.response.data.error);
+    });
+	}
+
 	rowContent(){
 		if(this.props.authenticated){
-			console.log("authenticated")
+			console.log("Authenticated");
 			return (
 				<Row>
 		      <Col xs={12} md={4}>
 		      	<Bucketlist 
 		      		bucketlists={this.state.bucketlists}
 		      		token={this.state.token}
+		      		getAllBucketlistItems={this.getAllBucketlistItems.bind(this)}
 		      	/>
 		      </Col>
-		      <Col xs={12} md={8}>...</Col>
+		      <Col xs={12} md={8}>
+		      	<BucketlistItem
+		      		bucketlistName={this.state.bucketlistOnFocus}
+		      		bucketlistItems={this.state.bucketlistItems}
+		      	/>
+		      </Col>
 		    </Row>
 			);
 		} else {
