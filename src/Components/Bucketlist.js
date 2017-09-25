@@ -1,34 +1,11 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
-const api_url = "http://localhost:5000"
 
 class Bucketlist extends Component{
-	constructor(){
-		super();
-		this.state = {
-			bucketlistItems: null,
-		}
-	}
 
-	getAllBucketlistItems(bucketlistId){
-		axios.get(api_url + "/bucketlists/" + bucketlistId + "/items", {
-			headers: {
-				'Authorization': 'Bearer ' + this.props.token,
-				'Content-Type': 'application/json',
-			}
-		})
-    .then((response) => {
-      console.log(response.data.message);
-    })
-    .catch((error) => {
-      console.log(error.response.data.error);
-    });
-	}
-
-	displayItems(id){
-		console.log(id);
-		this.getAllBucketlistItems(id);
+	displayItems(bucketlist){
+		console.log(bucketlist);
+		this.props.getAllBucketlistItems(bucketlist);
 	}
 
 	displayBucketlists(){
@@ -44,12 +21,17 @@ class Bucketlist extends Component{
 			);
 		} else {
 			return (
-				<ul className="list-group">
+				<ul className="list-group"> 
+						<strong>
+							<center>
+								Your Bucketlists
+							</center>
+						</strong>
 					{this.props.bucketlists.map((bucketlist) => {
 					   return (
-					   	<li onClick={this.displayItems.bind(this, bucketlist.id)} 
+					   	<li onClick={this.displayItems.bind(this, bucketlist)} 
 					   			key={bucketlist.id}
-					   			className="list-group-item"
+					   			className="list-group-item bucketlist"
 					   	>{bucketlist.name}</li>);
 					})}
 				</ul>
