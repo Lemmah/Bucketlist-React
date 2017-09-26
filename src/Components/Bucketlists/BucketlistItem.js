@@ -15,7 +15,7 @@ const buttonsInstance = (
 class BucketlistItem extends Component{
 
 	displayBucketlistItem(){
-		if(!this.props.bucketlistName){
+		if(!this.props.bucketlistName || !this.props.items){
 			return (
 				<ul className="list-group">
 					<h3>
@@ -32,7 +32,7 @@ class BucketlistItem extends Component{
 				</ul>
 			);
 		} else {
-			if(!this.props.bucketlistItems.length > 0){
+			if(!this.props.items.length > 0){
 				return(
 					<ul className="list-group">
 						<h3>
@@ -62,7 +62,7 @@ class BucketlistItem extends Component{
 			      		{buttonsInstance}
 			      	</Col>
 		      	</Row> 
-						{this.props.bucketlistItems.map((bucketlistItem) => {
+						{this.props.items.map((bucketlistItem) => {
 						   return (
 						   	<li
 						   			key={bucketlistItem.id}

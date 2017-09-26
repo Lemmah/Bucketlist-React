@@ -1,65 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavigationBar from './Components/Commons/NavigationBar';
 import PageLayout from './Components/Commons/PageLayout';
 import Footer from './Components/Commons/Footer'
-import axios from 'axios';
+import Requests from './Components/APICalls/Config'
 
 
-const api_url = "http://localhost:5000";
-const initialAppState = {
-			authenticated: false,
-			loginError: null,
-			registrationError: null,
-		}
-
-class App extends Component {
-	constructor(props){
-		super(props);
-		this.state = initialAppState
-	}
-
-	resetState(){
-		this.setState(initialAppState);
-	}
+class App extends Requests {
 
 	handleRegister(credentials){
 		this.resetState();
-		axios.post(api_url + "/auth/register", credentials)
-    .then((response) => {
-      console.log(response.data);
-      this.handleLogin(credentials);
-    })
-    .catch((error) => {
-      console.log(error.response.data);
-      this.setState({
-      	registrationError: error.response.data.error,
-      	loginError: null,
-      	authenticated: false,
-      });
-    });
+		const endPoint = "/auth/register";
+		this.authenticate(endPoint, credentials);
+	}
+
+	/* Remove this after I'm done with implementing
+	 inner functionality
+	 */
+	componentDidMount(){
+		const credentials = {
+			"email": "jnlemayian@gmail.com",
+			"password": "easyPass",
+		}
+		this.handleLogin(credentials);
 	}
 
 	handleLogin(credentials){
 		this.resetState();
-		axios.post(api_url + "/auth/login", credentials)
-    .then((response) => {
-      console.log(response.data.message);
-      this.setState({
-      	authenticated: response.data,
-      });
-    })
-    .catch((error) => {
-      console.log(error.response.data.error);
-      this.setState({
-      	loginError: error.response.data.error,
-      	registrationError: null,
-      	authenticated: false,
-      });
-    });
+		const endPoint = "/auth/login";
+		this.authenticate(endPoint, credentials);
 	}
 
 	handleLogout(){
 		this.resetState();
+	}
+
+	handleCreateBucketlist(resourceUrl, details){
+		this.createResource(resourceUrl, details);
+	}
+
+	handleCreateBucketlistItem(bucketlistId){
+		console.log("Bucketlist Item Created");
 	}
 
 	render() {
@@ -76,6 +56,7 @@ class App extends Component {
 			  		authenticated={this.state.authenticated}
 			  		onRegister={this.handleRegister.bind(this)}
 			  		registrationError={this.state.registrationError}
+			  		onCreateBucketlist={this.handleCreateBucketlist.bind(this)}
 			  	/>
 		  	</div>
 		  	<Footer />

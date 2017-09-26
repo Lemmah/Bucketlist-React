@@ -1,28 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
 import RegistrationForm from './../Authentication/RegistrationForm'
-import axios from 'axios'
 import Bucketlist from './../Bucketlists/Bucketlist'
 import BucketlistItem from './../Bucketlists/BucketlistItem'
+import Requests from './../APICalls/Config'
 
-const api_url="http://localhost:5000"
 
-
-class PageLayout extends Component{
+class PageLayout extends Requests{
 	constructor(){
 		super();
 		this.state = {
 			token: null,
 			username: null,
 			bucketlists: null,
-			bucketlistItems: null,
+			items: null,
 			bucketlistOnFocus: null,
 		}
 	} 
-
-	registerUser(credentials){
-    this.props.onRegister(credentials);
-	}
 
 	componentWillReceiveProps(nextProps){
 		if(nextProps.authenticated){
@@ -48,7 +42,8 @@ class PageLayout extends Component{
 		console.log(this.state.bucketlists);
 		if(this.state.bucketlists){
 			if(this.state.bucketlists.length > 0){
-				console.log("Bucketlists Present")
+				console.log("Bucketlists Present");
+				console.log(":>>>", prevState.bucketlists);
 				if(!prevState.bucketlists){
 					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
 					console.log("Bucketlists Change")
@@ -58,40 +53,26 @@ class PageLayout extends Component{
 		}
 	}
 
+	registerUser(credentials){
+    this.props.onRegister(credentials);
+	}
+
+	createBucketlist(resourceUrl, details){
+		this.props.onCreateBucketlist(resourceUrl, details);
+	}
+
 	getAllBucketlists(token){
-		axios.get(api_url + "/bucketlists", {
-			headers: {
-				'Authorization': 'Bearer ' + token,
-				'Content-Type': 'application/json',
-			}
-		})
-    .then((response) => {
-      this.setState({
-      	bucketlists: response.data.message
-      });
-      console.log(response.data.message);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+		const resource_name = "bucketlists";
+		const resource_url = "/bucketlists";
+		this.getResource(resource_name, resource_url, token);
 	}
 
 	getAllBucketlistItems(bucketlist){
-		axios.get(api_url + "/bucketlists/" + bucketlist.id + "/items", {
-			headers: {
-				'Authorization': 'Bearer ' + this.state.token,
-				'Content-Type': 'application/json',
-			}
-		})
-    .then((response) => {
-			this.setState({
-      	bucketlistItems: response.data.message,
+		const resource_name = "items";
+		const resource_url = "/bucketlists/" + bucketlist.id + "/items";
+		this.getResource(resource_name, resource_url, this.state.token);
+		this.setState({
       	bucketlistOnFocus: bucketlist.name,
-      });
-      console.log("Items reacieved: ",response.data.message);
-    })
-    .catch((error) => {
-      console.log(error.response.data.error);
     });
 	}
 
@@ -105,12 +86,13 @@ class PageLayout extends Component{
 		      		bucketlists={this.state.bucketlists}
 		      		token={this.state.token}
 		      		getAllBucketlistItems={this.getAllBucketlistItems.bind(this)}
+		      		createBucketlist={this.createBucketlist.bind(this)}
 		      	/>
 		      </Col>
 		      <Col xs={12} md={8}>
 		      	<BucketlistItem
 		      		bucketlistName={this.state.bucketlistOnFocus}
-		      		bucketlistItems={this.state.bucketlistItems}
+		      		items={this.state.items}
 		      	/>
 		      </Col>
 		    </Row>
