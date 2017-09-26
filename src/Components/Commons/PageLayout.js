@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col, Image } from 'react-bootstrap'
-import RegistrationForm from './RegistrationForm'
+import RegistrationForm from './../Authentication/RegistrationForm'
 import axios from 'axios'
-import Bucketlist from './Bucketlist'
-import BucketlistItem from './BucketlistItem'
+import Bucketlist from './../Bucketlists/Bucketlist'
+import BucketlistItem from './../Bucketlists/BucketlistItem'
 
 const api_url="http://localhost:5000"
 

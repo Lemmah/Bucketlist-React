@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NavigationBar from './Components/NavigationBar';
-import PageLayout from './Components/PageLayout';
-import Footer from './Components/Footer'
+import NavigationBar from './Components/Commons/NavigationBar';
+import PageLayout from './Components/Commons/PageLayout';
+import Footer from './Components/Commons/Footer'
 import axios from 'axios';
 
 
