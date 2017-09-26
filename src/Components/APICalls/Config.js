@@ -21,12 +21,12 @@ class Requests extends Component {
 	}
 
 	setHeaders(token){
-		return({
+		return {
 			headers: {
-				'Authorization': 'Bearer ' + token,
-				'Content-Type': 'application/json',
+				"Authorization": "Bearer " + token,
+				"Content-Type": "application/json",
 			}
-		});
+		};
 	}
 
 	authenticate(endPoint,credentials){
@@ -89,7 +89,16 @@ class Requests extends Component {
 	}	
 
 	createResource(resourceUrl, details){
-		console.log(resourceUrl, details);
+		const token = this.state.authenticated.message.access_token;
+		const headers = this.setHeaders(token);
+		let payload = details;
+		axios.post(apiUrl + resourceUrl, payload, headers)
+		.then((response) => {
+			console.log(response.data);
+		})
+		.catch(error => {
+			console.log(error.response)
+		})
 	}
 
 	deleteResource(){

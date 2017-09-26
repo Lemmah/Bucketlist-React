@@ -11,7 +11,7 @@ class Bucketlist extends Component{
 	createBucketlist(){
 		const resourceUrl = "/bucketlists"
 		let details = {
-			"name": "Lemmah",
+			"name": "Default Data",
 		}
 		this.props.createBucketlist(resourceUrl,details);
 	}
