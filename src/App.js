@@ -51,6 +51,7 @@ class App extends Requests {
       />
         <div className='container'>
           <PageLayout
+            newResource={this.state.newResource}
             authenticated={this.state.authenticated}
             onRegister={this.handleRegister.bind(this)}
             registrationError={this.state.registrationError}

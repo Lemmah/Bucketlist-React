@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Form, FormGroup,
-        ControlLabel } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 
 
 class CreateForm extends Component {
@@ -8,13 +7,12 @@ class CreateForm extends Component {
   createResource = (e) => {
     let resourceName = this.refs.resourceName.value;
     this.props.onCreateResource(resourceName);
-    console.log(">>",this.props.onCreateResource(resourceName))
     e.preventDefault();
   }
 
   render () {
     return (
-      <Modal {...this.props} bsSize='small' aria-labelledby='contained-modal-title-lg'>
+      <Modal show={this.props.show} onHide={this.props.onHide} bsSize='small' aria-labelledby='contained-modal-title-lg'>
         <Form horizontal onSubmit={this.createResource}>
           <Modal.Header closeButton>
             <Modal.Title id='contained-modal-title-lg'>Create Something</Modal.Title>

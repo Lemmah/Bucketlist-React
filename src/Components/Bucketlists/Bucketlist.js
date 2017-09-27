@@ -27,7 +27,6 @@ class Bucketlist extends Component{
 	}
 
 	displayItems(bucketlist){
-		console.log(bucketlist);
 		this.props.getAllBucketlistItems(bucketlist);
 	}
 
@@ -37,6 +36,9 @@ class Bucketlist extends Component{
 			"name": name,
 		}
 		this.props.createBucketlist(resourceUrl,details);
+		this.setState({
+			formShow: false,
+		});
 	}
 
 	displayBucketlists(){
@@ -86,7 +88,9 @@ class Bucketlist extends Component{
 				    <tbody>
 				      {this.props.bucketlists.map((bucketlist) => {
 							   return (
-							   	<tr onClick={this.displayItems.bind(this, bucketlist)} 
+							   	<tr 
+							   			style={{ cursor: "pointer" }}
+							   			onClick={this.displayItems.bind(this, bucketlist)} 
 							   			key={bucketlist.id}
 							   			className="bucketlist"
 							   	><td>{bucketlist.name}</td><td></td></tr>);
@@ -117,11 +121,11 @@ class Bucketlist extends Component{
 		return(
 			<div>
 				{this.displayBucketlists()}
-				{this.state.formShow ? <CreateForm 
+				<CreateForm 
 					show={this.state.formShow} 
 					onHide={this.formClose}
 					onCreateResource={this.createBucketlist}
-				/> : ""}
+				/>
 			</div>
 		);
 	}

@@ -19,6 +19,12 @@ class PageLayout extends Requests{
 	} 
 
 	componentWillReceiveProps(nextProps){
+		let oldBucketlists = this.state.bucketlists;
+		if(oldBucketlists){
+			oldBucketlists.splice(0,0,nextProps.newResource);
+			this.setState({bucketlists: oldBucketlists})
+		}
+
 		if(nextProps.authenticated){
 			console.log("Received")
 			if(nextProps.authenticated.message.user

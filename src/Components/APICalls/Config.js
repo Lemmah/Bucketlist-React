@@ -6,11 +6,7 @@ const initialAppState = {
 			authenticated: false,
 			loginError: null,
 			registrationError: null,
-			token: null,
-			username: null,
-			bucketlists: null,
-			items: null,
-			bucketlistOnFocus: null,
+	    newResource: []
 };
 
 class Requests extends Component {
@@ -60,7 +56,7 @@ class Requests extends Component {
 	      this.setState({
 	      	registrationError: error.response.data.error,
 	      	loginError: null,
-	      	authenticated: false,
+	      	authenticated: false
 	      });
 	    } else {
 	    	this.setState({
@@ -97,8 +93,8 @@ class Requests extends Component {
 		let payload = details;
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
+			this.setState({newResource: response.data});
 			console.log(response.data);
-			console.log(this.state);
 		})
 		.catch(error => {
 			console.log(error.response)
