@@ -1,17 +1,40 @@
 import React, { Component } from 'react'
+import CreateForm from './../Commons/CreateForm'
 
 
 class Bucketlist extends Component{
+	constructor(){
+		super();
+		this.state = {
+			formShow: false,
+		}
+
+		this.formClose = this.formClose.bind(this);
+		this.formOpen = this.formOpen.bind(this);
+		this.createBucketlist = this.createBucketlist.bind(this);
+	}
+
+	formClose(){
+		this.setState({
+			formShow: false,
+		})
+	}
+
+	formOpen(){
+		this.setState({
+			formShow: true,
+		})
+	}
 
 	displayItems(bucketlist){
 		console.log(bucketlist);
 		this.props.getAllBucketlistItems(bucketlist);
 	}
 
-	createBucketlist(){
+	createBucketlist(name){
 		const resourceUrl = "/bucketlists"
 		let details = {
-			"name": "Default Data",
+			"name": name,
 		}
 		this.props.createBucketlist(resourceUrl,details);
 	}
@@ -26,7 +49,7 @@ class Bucketlist extends Component{
 				        <th>
 				        	<button
 				        		className="btn btn-success btn-xs"
-				        		onClick={this.createBucketlist.bind(this)}
+				        		onClick={this.formOpen}
 				        	>
 									Create New
 									</button>
@@ -53,7 +76,7 @@ class Bucketlist extends Component{
 				        <th>
 				        	<button
 				        		className="btn btn-success btn-xs"
-				        		onClick={this.createBucketlist.bind(this)}
+				        		onClick={this.formOpen}
 				        	>
 									Create New
 									</button>
@@ -94,6 +117,11 @@ class Bucketlist extends Component{
 		return(
 			<div>
 				{this.displayBucketlists()}
+				{this.state.formShow ? <CreateForm 
+					show={this.state.formShow} 
+					onHide={this.formClose}
+					onCreateResource={this.createBucketlist}
+				/> : ""}
 			</div>
 		);
 	}

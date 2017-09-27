@@ -1,13 +1,16 @@
 import { Component } from 'react';
 
 let axios = require('axios');
-
 const apiUrl = "http://localhost:5000";
-
 const initialAppState = {
 			authenticated: false,
 			loginError: null,
 			registrationError: null,
+			token: null,
+			username: null,
+			bucketlists: null,
+			items: null,
+			bucketlistOnFocus: null,
 };
 
 class Requests extends Component {
@@ -95,6 +98,7 @@ class Requests extends Component {
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
 			console.log(response.data);
+			console.log(this.state);
 		})
 		.catch(error => {
 			console.log(error.response)
