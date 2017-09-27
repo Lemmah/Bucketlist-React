@@ -33,18 +33,36 @@ class BucketlistItem extends Component {
     } else {
       if (!this.props.items.length > 0) {
         return (
-          <ul className='list-group'>
-            <h3>
-              <center>
-                {this.props.bucketlistName}
-              </center>
-            </h3>
-            <li className='list-group-item' />
-            <li className='list-group-item'>
-              There are no activities in here.
-            </li>
-            <li className='list-group-item' />
-          </ul>
+          <table className="table">
+            <thead>
+              <tr>
+                <th><h3>{this.props.bucketlistName}</h3></th>
+                <th>
+                  <button
+                    className="btn btn-success btn-sm"
+                  >
+                  Add Items
+                  </button>{' '}
+                  <button
+                    className="btn btn-info btn-sm"
+                  >
+                  Edit Details
+                  </button>{' '}
+                  <button
+                    className="btn btn-danger btn-sm"
+                  >
+                  Delete
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ cursor: "pointer" }}>
+                <td>This Bucketlist is empty.</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         )
       } else {
         return (

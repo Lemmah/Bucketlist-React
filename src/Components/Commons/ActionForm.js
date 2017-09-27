@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 
 
-class CreateForm extends Component {
+class ActionForm extends Component {
 
   createResource = (e) => {
     let resourceName = this.refs.resourceName.value;
@@ -15,7 +15,7 @@ class CreateForm extends Component {
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize='small' aria-labelledby='contained-modal-title-lg'>
         <Form horizontal onSubmit={this.createResource}>
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-lg'>Create Something</Modal.Title>
+            <Modal.Title id='contained-modal-title-lg'>{this.props.action}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <label>Name:</label>
@@ -36,7 +36,7 @@ class CreateForm extends Component {
               bsStyle="success"
               type="submit"
             >
-              Create
+             {this.props.action.split(' ')[0]}
             </Button>
           </Modal.Footer>
         </Form>
@@ -45,4 +45,4 @@ class CreateForm extends Component {
   }
 }
 
-export default CreateForm
+export default ActionForm

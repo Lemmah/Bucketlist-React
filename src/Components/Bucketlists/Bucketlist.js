@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CreateForm from './../Commons/CreateForm'
+import ActionForm from './../Commons/ActionForm'
 
 
 class Bucketlist extends Component{
@@ -39,6 +39,10 @@ class Bucketlist extends Component{
 		this.setState({
 			formShow: false,
 		});
+	}
+
+	hoverStyle(){
+		console.log("Hovered");
 	}
 
 	displayBucketlists(){
@@ -90,6 +94,7 @@ class Bucketlist extends Component{
 							   return (
 							   	<tr 
 							   			style={{ cursor: "pointer" }}
+							   			onMouseOver={this.hoverStyle.bind(this)}
 							   			onClick={this.displayItems.bind(this, bucketlist)} 
 							   			key={bucketlist.id}
 							   			className="bucketlist"
@@ -121,7 +126,8 @@ class Bucketlist extends Component{
 		return(
 			<div>
 				{this.displayBucketlists()}
-				<CreateForm 
+				<ActionForm
+					action='Create Bucketlist' 
 					show={this.state.formShow} 
 					onHide={this.formClose}
 					onCreateResource={this.createBucketlist}
