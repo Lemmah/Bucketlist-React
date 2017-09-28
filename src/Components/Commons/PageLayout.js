@@ -19,10 +19,10 @@ class PageLayout extends Requests{
 	} 
 
 	componentWillReceiveProps(nextProps){
-		let oldBucketlists = this.state.bucketlists;
-		if(oldBucketlists){
-			oldBucketlists.splice(0,0,nextProps.newBucketlist);
-			this.setState({bucketlists: oldBucketlists})
+		let bucketlists = this.state.bucketlists;
+		if(bucketlists){
+			bucketlists.splice(0,0,nextProps.newBucketlist);
+			this.setState({bucketlists: bucketlists})
 		}
 
 		if(nextProps.authenticated){
