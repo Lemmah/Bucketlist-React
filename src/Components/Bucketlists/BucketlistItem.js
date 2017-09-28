@@ -117,28 +117,32 @@ class BucketlistItem extends Component {
             </thead>
             <tbody>
                 {this.props.items.map((bucketlistItem) => {
-                        return (
-                          <tr style={{ cursor: "pointer" }}>
-                          <td
-                            key={bucketlistItem.id}
-                            className='bucketlistItem'
-                          >
-                          {bucketlistItem.name}
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-info btn-sm"
-                            >
-                            Edit Details
-                            </button>{' '}
-                            <button
-                              className="btn btn-danger btn-sm"
-                            >
-                            Delete
-                            </button>
-                          </td>
-                          </tr>)
-                      })}    
+                  if(!bucketlistItem){
+                    return null;
+                  } else {
+                  return (
+                    <tr style={{ cursor: "pointer" }}
+                        key={bucketlistItem.id}>
+                    <td
+                      className='bucketlistItem'
+                    >
+                    {bucketlistItem.name}
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-info btn-sm"
+                      >
+                      Edit Details
+                      </button>{' '}
+                      <button
+                        className="btn btn-danger btn-sm"
+                      >
+                      Delete
+                      </button>
+                    </td>
+                    </tr>)
+                }
+                })}    
             </tbody>
           </table>  
         )

@@ -90,14 +90,20 @@ class Bucketlist extends Component{
 			    </thead>
 			    <tbody>
 			      {this.props.bucketlists.map((bucketlist) => {
+			      	if (!bucketlist) {
+			      		return null;
+			      	}
 						   return (
 						   	<tr 
-						   			style={{ cursor: "pointer" }}
-						   			onMouseOver={this.hoverStyle.bind(this)}
-						   			onClick={this.displayItems.bind(this, bucketlist)} 
-						   			key={bucketlist.id}
-						   			className="bucketlist"
-						   	><td>{bucketlist.name}</td><td></td></tr>);
+					   			style={{ cursor: "pointer" }}
+					   			onMouseOver={this.hoverStyle.bind(this)}
+					   			onClick={this.displayItems.bind(this, bucketlist)} 
+					   			key={bucketlist.id}
+					   			className="bucketlist"
+						   	>
+						   		<td>{bucketlist.name}</td><td></td>
+						   	</tr>
+						  );
 						})}
 			    </tbody>
 			  </table>

@@ -15,14 +15,27 @@ class PageLayout extends Requests{
 			bucketlists: null,
 			items: null,
 			bucketlistOnFocus: null,
+			firstFocus: true,
 		}
 	} 
 
 	componentWillReceiveProps(nextProps){
 		let bucketlists = this.state.bucketlists;
-		if(bucketlists){
-			bucketlists.splice(0,0,nextProps.newBucketlist);
-			this.setState({bucketlists: bucketlists})
+		if(nextProps.newBucketlist){
+			if(!bucketlists) {
+				bucketlists = []
+			}
+				bucketlists.splice(0,0,nextProps.newBucketlist);
+				this.setState({bucketlists: bucketlists})
+		}
+
+		let items = this.state.items;
+		if(nextProps.newBucketlistItem){
+			if(!items){
+				items = []
+			}
+				items.push(nextProps.newBucketlistItem);
+				this.setState({items: items})
 		}
 
 		if(nextProps.authenticated){
@@ -38,22 +51,21 @@ class PageLayout extends Requests{
 					token: token,
 				});
 				this.getAllBucketlists(token);
-				console.log("Changed")
 			}
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState){
-		console.log(prevState.bucketlists);
-		console.log(this.state.bucketlists);
+		console.log(":::Items:::", this.state.items)
+		console.log(":::Bucketlists:::", this.state.bucketlists)
 		if(this.state.bucketlists){
 			if(this.state.bucketlists.length > 0){
-				console.log("Bucketlists Present");
-				console.log(":>>>", prevState.bucketlists);
-				if(prevState.bucketlists.length === 0){
+				if(this.state.firstFocus){
 					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
-					console.log("Bucketlists Change")
 					firstBucketlist.click();
+					this.setState({
+						firstFocus: false,
+					});
 				}
 			}
 		}

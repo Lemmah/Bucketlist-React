@@ -82,7 +82,7 @@ class Requests extends Component {
 																response.data.message:
 																null
 															);
-			console.log("::::",configs);
+			console.log("::::", configs);
 			this.setState(configs);
 		})
 		.catch((error) => {
@@ -98,9 +98,15 @@ class Requests extends Component {
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
 			(resourceType === 'bucketlist' ? 
-				this.setState({newBucketlist: response.data})
+				this.setState({
+					newBucketlist: response.data,
+					newBucketlistItem: null,
+				})
 			:
-				this.setState({newBucketlistItem: response.data}))
+				this.setState({
+					newBucketlistItem: response.data,
+					newBucketlist: null,
+				}))
 		})
 		.catch(error => {
 			console.log(error.response)
