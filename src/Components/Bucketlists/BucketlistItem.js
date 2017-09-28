@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, ButtonToolbar, Row, Col } from 'react-bootstrap'
+import ActionForm from './../Commons/ActionForm'
 
 const buttonsInstance = (
   <ButtonToolbar>
@@ -13,6 +14,33 @@ const buttonsInstance = (
 )
 
 class BucketlistItem extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      formShow: false,
+    }
+
+    this.formClose = this.formClose.bind(this);
+    this.formOpen = this.formOpen.bind(this);
+    this.createBucketlistItem = this.createBucketlistItem.bind(this);
+  }
+
+  formClose(){
+    this.setState({
+      formShow: false,
+    })
+  }
+
+  formOpen(){
+    this.setState({
+      formShow: true,
+    })
+  }
+
+  createBucketlistItem(){
+    console.log("Create Bucketlist Item")
+  }
+
   displayBucketlistItem () {
     if (!this.props.bucketlistName || !this.props.items) {
       return (
@@ -36,12 +64,13 @@ class BucketlistItem extends Component {
           <table className="table">
             <thead>
               <tr>
-                <th><h3>{this.props.bucketlistName}</h3></th>
+                <th><h3>{this.props.bucketlistName.name}</h3></th>
                 <th>
                   <button
                     className="btn btn-success btn-sm"
+                    onClick={this.formOpen}
                   >
-                  Add Items
+                  Add Activity
                   </button>{' '}
                   <button
                     className="btn btn-info btn-sm"
@@ -107,6 +136,12 @@ class BucketlistItem extends Component {
     return (
       <div>
         {this.displayBucketlistItem()}
+        <ActionForm
+          action='Add Activity' 
+          show={this.state.formShow} 
+          onHide={this.formClose}
+          onCreateResource={this.createBucketlistItem}
+        />
       </div>
     )
   }

@@ -33,7 +33,8 @@ class App extends Requests {
   }
 
   handleCreateBucketlist (resourceUrl, details) {
-    this.createResource(resourceUrl, details)
+    const resourceType = "bucketlist"
+    this.createResource(resourceType, resourceUrl, details)
   }
 
   handleCreateBucketlistItem (bucketlistId) {
@@ -51,7 +52,8 @@ class App extends Requests {
       />
         <div className='container'>
           <PageLayout
-            newResource={this.state.newResource}
+            newBucketlist={this.state.newBucketlist}
+            newBucketlistItem={this.state.newBucketlistItem}
             authenticated={this.state.authenticated}
             onRegister={this.handleRegister.bind(this)}
             registrationError={this.state.registrationError}

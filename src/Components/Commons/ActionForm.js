@@ -13,7 +13,7 @@ class ActionForm extends Component {
   render () {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide} bsSize='small' aria-labelledby='contained-modal-title-lg'>
-        <Form horizontal onSubmit={this.createResource}>
+        <Form horizontal onSubmit={this.createResource.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title id='contained-modal-title-lg'>{this.props.action}</Modal.Title>
           </Modal.Header>

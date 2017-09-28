@@ -21,7 +21,7 @@ class PageLayout extends Requests{
 	componentWillReceiveProps(nextProps){
 		let oldBucketlists = this.state.bucketlists;
 		if(oldBucketlists){
-			oldBucketlists.splice(0,0,nextProps.newResource);
+			oldBucketlists.splice(0,0,nextProps.newBucketlist);
 			this.setState({bucketlists: oldBucketlists})
 		}
 
@@ -78,7 +78,7 @@ class PageLayout extends Requests{
 		const resource_url = "/bucketlists/" + bucketlist.id + "/items";
 		this.getResource(resource_name, resource_url, this.state.token);
 		this.setState({
-      	bucketlistOnFocus: bucketlist.name,
+      	bucketlistOnFocus: bucketlist,
     });
 	}
 

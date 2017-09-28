@@ -6,7 +6,8 @@ const initialAppState = {
 			authenticated: false,
 			loginError: null,
 			registrationError: null,
-	    newResource: []
+	    newBucketlist: null,
+	    newBucketlistItem: null,
 };
 
 class Requests extends Component {
@@ -87,14 +88,16 @@ class Requests extends Component {
 		})
 	}	
 
-	createResource(resourceUrl, details){
+	createResource(resourceType, resourceUrl, details){
 		const token = this.state.authenticated.message.access_token;
 		const headers = this.setHeaders(token);
 		let payload = details;
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
-			this.setState({newResource: response.data});
-			console.log(response.data);
+			(resourceType === 'bucketlist' ? 
+				this.setState({newBucketlist: response.data})
+			:
+				this.setState({newBucketlistItem: response.data}))
 		})
 		.catch(error => {
 			console.log(error.response)
