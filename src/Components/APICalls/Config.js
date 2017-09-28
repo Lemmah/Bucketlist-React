@@ -78,7 +78,10 @@ class Requests extends Component {
 		.then((response) => {
 			const configs = this.state;
 			console.log(":::::",configs);
-			configs[resourceName] = response.data.message;
+			configs[resourceName] = (	response.data.message.length > 0 ?
+																response.data.message:
+																null
+															);
 			console.log("::::",configs);
 			this.setState(configs);
 		})

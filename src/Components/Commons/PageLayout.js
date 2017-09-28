@@ -50,7 +50,7 @@ class PageLayout extends Requests{
 			if(this.state.bucketlists.length > 0){
 				console.log("Bucketlists Present");
 				console.log(":>>>", prevState.bucketlists);
-				if(!prevState.bucketlists){
+				if(prevState.bucketlists.length === 0){
 					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
 					console.log("Bucketlists Change")
 					firstBucketlist.click();
@@ -97,7 +97,7 @@ class PageLayout extends Requests{
 		      </Col>
 		      <Col xs={12} md={8}>
 		      	<BucketlistItem
-		      		bucketlistName={this.state.bucketlistOnFocus}
+		      		bucketlist={this.state.bucketlistOnFocus}
 		      		items={this.state.items}
 		      	/>
 		      </Col>

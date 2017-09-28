@@ -49,78 +49,62 @@ class Bucketlist extends Component{
 		if(!this.props.bucketlists){
 			return(
 				<table className="table">
-				    <thead>
-				      <tr>
-				        <th>Your Bucketlists</th>
-				        <th>
-				        	<button
-				        		className="btn btn-success btn-xs"
-				        		onClick={this.formOpen}
-				        	>
-									Create New
-									</button>
-								</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-				      <tr>
-				      	<td>No Bucketlists -</td>
-				      	<td>
-				      		Start by creating some.
-				      	</td>
-				      </tr>
-				    </tbody>
-				  </table>
+			    <thead>
+			      <tr>
+			        <th>Your Bucketlists</th>
+			        <th>
+			        	<button
+			        		className="btn btn-success btn-xs"
+			        		onClick={this.formOpen}
+			        	>
+								Create New
+								</button>
+							</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			      	<td>No Bucketlists -</td>
+			      	<td>
+			      		Start by creating some.
+			      	</td>
+			      </tr>
+			    </tbody>
+			  </table>
 			);
 		} else {
-			if(this.props.bucketlists.length > 0){
-				return (
-					<table className="table">
-				    <thead>
-				      <tr>
-				        <th>Your Bucketlists</th>
-				        <th>
-				        	<button
-				        		className="btn btn-success btn-xs"
-				        		onClick={this.formOpen}
-				        	>
-									Create New
-									</button>
-								</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-				      {this.props.bucketlists.map((bucketlist) => {
-							   return (
-							   	<tr 
-							   			style={{ cursor: "pointer" }}
-							   			onMouseOver={this.hoverStyle.bind(this)}
-							   			onClick={this.displayItems.bind(this, bucketlist)} 
-							   			key={bucketlist.id}
-							   			className="bucketlist"
-							   	><td>{bucketlist.name}</td><td></td></tr>);
-							})}
-				    </tbody>
-				  </table>
-				);
-			} else {
-				return(
-					<ul className="list-group">
-					  <strong>
-								<center>
-									Your Bucketlists
-								</center>
-							</strong>
-						<li className="list-group-item"></li>
-					  <li className="list-group-item">
-					  	There are no Bucketlists here.
-					  </li>
-					  <li className="list-group-item"></li>
-					</ul>
-				);	
-			}
+			return (
+				<table className="table">
+			    <thead>
+			      <tr>
+			        <th>Your Bucketlists</th>
+			        <th>
+			        	<button
+			        		className="btn btn-success btn-xs"
+			        		onClick={this.formOpen}
+			        	>
+								Create New
+								</button>
+							</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      {this.props.bucketlists.map((bucketlist) => {
+						   return (
+						   	<tr 
+						   			style={{ cursor: "pointer" }}
+						   			onMouseOver={this.hoverStyle.bind(this)}
+						   			onClick={this.displayItems.bind(this, bucketlist)} 
+						   			key={bucketlist.id}
+						   			className="bucketlist"
+						   	><td>{bucketlist.name}</td><td></td></tr>);
+						})}
+			    </tbody>
+			  </table>
+			);
 		}
 	}
+
 
 	render(){
 		return(
