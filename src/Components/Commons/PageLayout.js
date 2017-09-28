@@ -117,6 +117,10 @@ class PageLayout extends Requests{
 			items: (items.length > 0 ?
 							items : null),
 		})
+		const token = this.state.token
+		let bucketlistId = this.state.bucketlistOnFocus.id
+		const resourceUrl = "/bucketlists/"+bucketlistId+"/items/"+id
+		this.deleteResource(resourceUrl, token)
 	}
 
 	rowContent(){
