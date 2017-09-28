@@ -14,13 +14,13 @@ class App extends Requests {
   /* Remove this after I'm done with implementing
    inner functionality
   */
-  /*componentDidMount () {
+  componentDidMount () {
     const credentials = {
       'email': 'jnlemayian@gmail.com',
       'password': 'easyPass'
     }
     this.handleLogin(credentials)
-  }*/
+  }
 
   handleLogin (credentials) {
     this.resetState()
@@ -37,8 +37,9 @@ class App extends Requests {
     this.createResource(resourceType, resourceUrl, details)
   }
 
-  handleCreateBucketlistItem (bucketlistId) {
-    console.log('Bucketlist Item Created')
+  handleCreateBucketlistItem (resourceUrl, details) {
+    const resourceType = "bucketlistItem"
+    this.createResource(resourceType, resourceUrl, details)
   }
 
   render () {
@@ -58,6 +59,7 @@ class App extends Requests {
             onRegister={this.handleRegister.bind(this)}
             registrationError={this.state.registrationError}
             onCreateBucketlist={this.handleCreateBucketlist.bind(this)}
+            onCreateBucketlistItem={this.handleCreateBucketlistItem.bind(this)}
         />
         </div>
         <Footer />

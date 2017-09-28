@@ -67,6 +67,10 @@ class PageLayout extends Requests{
 		this.props.onCreateBucketlist(resourceUrl, details);
 	}
 
+	createBucketlistItem(resourceUrl, details){
+		this.props.onCreateBucketlistItem(resourceUrl, details);
+	}
+
 	getAllBucketlists(token){
 		const resource_name = "bucketlists";
 		const resource_url = "/bucketlists";
@@ -99,6 +103,7 @@ class PageLayout extends Requests{
 		      	<BucketlistItem
 		      		bucketlist={this.state.bucketlistOnFocus}
 		      		items={this.state.items}
+		      		createBucketlistItem={this.createBucketlistItem.bind(this)}
 		      	/>
 		      </Col>
 		    </Row>

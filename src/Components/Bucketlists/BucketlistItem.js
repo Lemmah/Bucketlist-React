@@ -26,8 +26,15 @@ class BucketlistItem extends Component {
     })
   }
 
-  createBucketlistItem(){
-    console.log("Create Bucketlist Item")
+  createBucketlistItem(name){
+    const resourceUrl = "/bucketlists/"+this.props.bucketlist.id+"/items"
+    let details = {
+      "name": name,
+    }
+    this.props.createBucketlistItem(resourceUrl, details)
+    this.setState({
+      formShow: false,
+    })
   }
 
   displayBucketlistItem () {
