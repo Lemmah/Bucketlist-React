@@ -17,6 +17,13 @@ class PageLayout extends Requests{
 			bucketlistOnFocus: null,
 			firstFocus: true,
 		}
+
+		this.getAllBucketlistItems = this.getAllBucketlistItems.bind(this)
+		this.createBucketlist = this.createBucketlist.bind(this)
+		this.createBucketlistItem = this.createBucketlistItem.bind(this)
+		this.createBucketlistItem = this.createBucketlistItem.bind(this)
+		this.deleteBucketlist = this.deleteBucketlist.bind(this)
+		this.deleteBucketlistItem = this.deleteBucketlistItem.bind(this)
 	} 
 
 	componentWillReceiveProps(nextProps){
@@ -131,17 +138,17 @@ class PageLayout extends Requests{
 		      	<Bucketlist 
 		      		bucketlists={this.state.bucketlists}
 		      		token={this.state.token}
-		      		getAllBucketlistItems={this.getAllBucketlistItems.bind(this)}
-		      		createBucketlist={this.createBucketlist.bind(this)}
+		      		getAllBucketlistItems={this.getAllBucketlistItems}
+		      		createBucketlist={this.createBucketlist}
 		      	/>
 		      </Col>
 		      <Col xs={12} md={8}>
 		      	<BucketlistItem
 		      		bucketlist={this.state.bucketlistOnFocus}
 		      		items={this.state.items}
-		      		createBucketlistItem={this.createBucketlistItem.bind(this)}
-		      		deleteBucketlist={this.deleteBucketlist.bind(this)}
-		      		deleteBucketlistItem={this.deleteBucketlistItem.bind(this)}
+		      		createBucketlistItem={this.createBucketlistItem}
+		      		deleteBucketlist={this.deleteBucketlist}
+		      		deleteBucketlistItem={this.deleteBucketlistItem}
 		      	/>
 		      </Col>
 		    </Row>
