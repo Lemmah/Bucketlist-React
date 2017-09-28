@@ -5,7 +5,15 @@ class DataTable extends Component {
 	formOpen(){
 		this.props.formOpen()
 	}
-	
+
+	deleteBucketlist(){
+		this.props.deleteBucketlist()
+	}
+
+	deleteItem(id){
+		this.props.deleteItem(id)
+	}
+
 	tableHeader(){
 		if(!this.props.bucketlist){
 			return (
@@ -34,6 +42,7 @@ class DataTable extends Component {
             </button>{' '}
             <button
               className="btn btn-danger btn-sm"
+              onClick={this.deleteBucketlist.bind(this)}
             >
             Delete
             </button>
@@ -48,9 +57,15 @@ class DataTable extends Component {
 			return (
 				<tbody>
 					<tr style={{ cursor: "pointer" }}>
-		          <td>This Bucketlist is empty.</td>
+		          <td>
+		          	This Bucketlist is empty.
+		          </td>
 		          <td></td>
 		      </tr>
+		      <tr>
+		        <td><br /></td>
+		        <td><br /></td>    
+	        </tr>
 		    </tbody>
 			)
 		} else {
@@ -76,6 +91,7 @@ class DataTable extends Component {
 	                </button>{' '}
 	                <button
 	                  className="btn btn-danger btn-sm"
+	                  onClick={this.deleteItem.bind(this, bucketlistItem.id)}
 	                >
 	                Delete
 	                </button>
@@ -83,6 +99,10 @@ class DataTable extends Component {
 	              </tr>)
 	          }
 	        })}
+	        <tr>
+		        <td><br /></td>
+		        <td><br /></td>    
+	        </tr>
 	      </tbody>
 		)
 		}

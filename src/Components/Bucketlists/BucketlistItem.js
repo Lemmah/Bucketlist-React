@@ -13,6 +13,8 @@ class BucketlistItem extends Component {
     this.formClose = this.formClose.bind(this);
     this.formOpen = this.formOpen.bind(this);
     this.createBucketlistItem = this.createBucketlistItem.bind(this);
+    this.deleteBucketlist = this.deleteBucketlist.bind(this);
+    this.deleteItem = this.deleteBucketlistItem.bind(this);
   }
 
   formClose(){
@@ -27,6 +29,15 @@ class BucketlistItem extends Component {
     })
   }
 
+  deleteBucketlist(){
+    const bucketlistId = this.props.bucketlist.id
+    this.props.deleteBucketlist(bucketlistId)
+  }
+
+  deleteBucketlistItem(id){
+    this.props.deleteBucketlistItem(id)
+  }
+
   createBucketlistItem(name){
     const resourceUrl = "/bucketlists/"+this.props.bucketlist.id+"/items"
     let details = {
@@ -39,19 +50,12 @@ class BucketlistItem extends Component {
   }
 
   displayBucketlistItem () {
-    if (!this.props.bucketlist) {
-      return (<DataTable {...this.props}/>)
-    } else {
-      if (!this.props.items) {
-        return (
-          <DataTable {...this.props}/>
-        )
-      } else {
-        return (
-          <DataTable {...this.props} formOpen={this.formOpen.bind(this)}/>
-        )
-      }
-    }
+    return <DataTable 
+              {...this.props} 
+              formOpen={this.formOpen}
+              deleteBucketlist={this.deleteBucketlist}
+              deleteItem={this.deleteItem}
+            />
   }
 
   render () {

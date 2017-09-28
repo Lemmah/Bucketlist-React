@@ -93,6 +93,32 @@ class PageLayout extends Requests{
     });
 	}
 
+	deleteBucketlist(id){
+		let bucketlists = this.state.bucketlists
+		let index = bucketlists.findIndex(bl => bl.id === id)
+		bucketlists.splice(index, 1)
+		this.setState({
+			bucketlists: (bucketlists.length > 0 ? 
+										bucketlists : null),
+			bucketlistOnFocus: null,
+			items: null,
+			firstFocus: true,
+		})
+		const token = this.state.token
+		const resourceUrl = "/bucketlists/" + id
+		this.deleteResource(resourceUrl, token)
+	}
+
+	deleteBucketlistItem(id){
+		let items = this.state.items
+		let index = items.findIndex(bli => bli.id === id)
+		items.splice(index, 1)
+		this.setState({
+			items: (items.length > 0 ?
+							items : null),
+		})
+	}
+
 	rowContent(){
 		if(this.props.authenticated){
 			return (
@@ -110,6 +136,8 @@ class PageLayout extends Requests{
 		      		bucketlist={this.state.bucketlistOnFocus}
 		      		items={this.state.items}
 		      		createBucketlistItem={this.createBucketlistItem.bind(this)}
+		      		deleteBucketlist={this.deleteBucketlist.bind(this)}
+		      		deleteBucketlistItem={this.deleteBucketlistItem.bind(this)}
 		      	/>
 		      </Col>
 		    </Row>

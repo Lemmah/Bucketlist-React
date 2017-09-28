@@ -69,6 +69,10 @@ class Bucketlist extends Component{
 			      		Start by creating some.
 			      	</td>
 			      </tr>
+			      <tr>
+			        <td><br /></td>
+			        <td><br /></td>    
+		        </tr>
 			    </tbody>
 			  </table>
 			);
@@ -105,6 +109,10 @@ class Bucketlist extends Component{
 						   	</tr>
 						  );
 						})}
+						<tr>
+			        <td><br /></td>
+			        <td><br /></td>    
+		        </tr>
 			    </tbody>
 			  </table>
 			);

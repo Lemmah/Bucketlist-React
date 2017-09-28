@@ -109,8 +109,18 @@ class Requests extends Component {
 		})
 	}
 
-	deleteResource(){
-		console.log("Resource Deleted");
+	deleteResource(resourceUrl, token){
+		/*
+			Delete Resource Method basically deletes either a 
+			Bucketlist or a Bucketlist Item Resource
+		*/
+		axios.delete(apiUrl+resourceUrl, this.setHeaders(token))
+		.then((response) => {
+			console.log(response.data)
+		})
+		.catch((error) => {
+			console.log(error.response)
+		})
 	}
 }
 
