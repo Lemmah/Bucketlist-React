@@ -39,7 +39,6 @@ class Requests extends Component {
       		registrationMsg = "registered successfully";
       if(responseData.info === undefined){
       	if(responseData.includes(registrationMsg)){
-	      	console.log("should login");
 	      	this.handleLogin(credentials);
 	      }
       } else {
@@ -76,12 +75,10 @@ class Requests extends Component {
 		axios.get(apiUrl+resourceUrl, this.setHeaders(token))
 		.then((response) => {
 			const configs = this.state;
-			console.log(":::::",configs);
 			configs[resourceName] = (	response.data.message.length > 0 ?
 																response.data.message:
 																null
 															);
-			console.log("::::", configs);
 			this.setState(configs);
 		})
 		.catch((error) => {

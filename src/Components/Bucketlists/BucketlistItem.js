@@ -40,21 +40,7 @@ class BucketlistItem extends Component {
 
   displayBucketlistItem () {
     if (!this.props.bucketlist) {
-      return (
-        <ul className='list-group'>
-          <h3>
-            <center>
-                Welcome! Before you die...?
-              </center>
-          </h3>
-          <li className='list-group-item' />
-          <li className='list-group-item'>
-            You currently don't have any bucketlists! Maybe you should
-            start by creating one then activities you add to it will appear here.
-          </li>
-          <li className='list-group-item' />
-        </ul>
-      )
+      return (<DataTable {...this.props}/>)
     } else {
       if (!this.props.items) {
         return (
@@ -62,61 +48,7 @@ class BucketlistItem extends Component {
         )
       } else {
         return (
-          <table className="table">
-            <thead>
-              <tr>
-                <th><h3>{this.props.bucketlist.name} Activities</h3></th>
-                <th>
-                  <button
-                    className="btn btn-success btn-sm"
-                    onClick={this.formOpen}
-                  >
-                  Add Activity
-                  </button>{' '}
-                  <button
-                    className="btn btn-info btn-sm"
-                  >
-                  Edit Details
-                  </button>{' '}
-                  <button
-                    className="btn btn-danger btn-sm"
-                  >
-                  Delete
-                  </button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-                {this.props.items.map((bucketlistItem) => {
-                  if(!bucketlistItem){
-                    return null;
-                  } else {
-                    console.log(":::BucketlistId:::",bucketlistItem.id,this.props.bucketlist.id)
-                    return (
-                      <tr style={{ cursor: "pointer" }}
-                          key={bucketlistItem.id}>
-                      <td
-                        className='bucketlistItem'
-                      >
-                      {bucketlistItem.name}
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-info btn-sm"
-                        >
-                        Edit Details
-                        </button>{' '}
-                        <button
-                          className="btn btn-danger btn-sm"
-                        >
-                        Delete
-                        </button>
-                      </td>
-                      </tr>)
-                  }
-                })}    
-            </tbody>
-          </table>  
+          <DataTable {...this.props} formOpen={this.formOpen.bind(this)}/>
         )
       }
     }
