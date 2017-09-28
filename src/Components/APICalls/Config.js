@@ -35,7 +35,6 @@ class Requests extends Component {
 		*/
 		axios.post(apiUrl + endPoint, credentials)
     .then((response) => {
-      console.log(response.data.message);
       let responseData = response.data.message,
       		registrationMsg = "registered successfully";
       if(responseData.info === undefined){

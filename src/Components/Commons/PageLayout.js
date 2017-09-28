@@ -37,12 +37,9 @@ class PageLayout extends Requests{
 				items.push(nextProps.newBucketlistItem);
 				this.setState({items: items})
 		}
-
 		if(nextProps.authenticated){
-			console.log("Received")
 			if(nextProps.authenticated.message.user
 				=== this.state.username){
-				console.log("Unchanged");
 				return;
 			} else {
 				const token = nextProps.authenticated.message.access_token;
@@ -56,8 +53,6 @@ class PageLayout extends Requests{
 	}
 
 	componentDidUpdate(prevProps, prevState){
-		console.log(":::Items:::", this.state.items)
-		console.log(":::Bucketlists:::", this.state.bucketlists)
 		if(this.state.bucketlists){
 			if(this.state.bucketlists.length > 0){
 				if(this.state.firstFocus){
@@ -100,7 +95,6 @@ class PageLayout extends Requests{
 
 	rowContent(){
 		if(this.props.authenticated){
-			console.log("Authenticated");
 			return (
 				<Row>
 		      <Col xs={12} md={4}>
