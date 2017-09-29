@@ -21,8 +21,9 @@ class BucketlistItem extends Component {
     this.deleteItem = this.deleteBucketlistItem.bind(this);
     this.editItem = this.editBucketlistItem.bind(this);
     this.updateBucketlistItem = this.updateBucketlistItem.bind(this);
-    this.editBucketlist = this.editBucketlist.bind(this)
-    this.checkResourceUpdate = this.checkResourceUpdate.bind(this)
+    this.editBucketlist = this.editBucketlist.bind(this);
+    this.checkResourceUpdate = this.checkResourceUpdate.bind(this);
+    this.updateBucketlist = this.updateBucketlist.bind(this);
   }
 
   formClose(){
@@ -62,7 +63,7 @@ class BucketlistItem extends Component {
     if(resourceType === "bucketlistItem"){
       this.updateBucketlistItem(details)
     } else {
-      console.log("Bucketlist Update: ", details)
+      this.updateBucketlist(details)
     }
   }
 
@@ -81,8 +82,18 @@ class BucketlistItem extends Component {
     let action = "Update " + bucketlist.name
     this.setState({
       value: bucketlist.name,
+      updatingResource: "bucketlist",
     })
     this.formOpen(action)
+  }
+
+  updateBucketlist(details){
+    this.props.updateBucketlist(details)
+    this.formClose()
+    this.setState({
+      value: "",
+      updatingResource: null,
+    })
   }
 
   createBucketlistItem(name){
