@@ -66,9 +66,15 @@ class DataTable extends Component {
 			return (
 				<tbody>
 					<tr style={{ cursor: "pointer" }}>
+							{(this.props.bucketlist ? 
 		          <td>
 		          	This Bucketlist is empty.
 		          </td>
+		          :
+		          <td>
+		          	Yo! Start making your life meaningful!
+		          </td>
+		          )}
 		          <td></td>
 		      </tr>
 		      <tr>
