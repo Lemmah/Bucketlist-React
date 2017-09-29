@@ -10,6 +10,7 @@ class BucketlistItem extends Component {
       formShow: false,
       action: "Default Form",
       value: "",
+      itemOnFocus: null,
     }
 
     this.formClose = this.formClose.bind(this);
@@ -18,6 +19,7 @@ class BucketlistItem extends Component {
     this.deleteBucketlist = this.deleteBucketlist.bind(this);
     this.deleteItem = this.deleteBucketlistItem.bind(this);
     this.editItem = this.editBucketlistItem.bind(this);
+    this.updateBucketlistItem = this.updateBucketlistItem.bind(this);
   }
 
   formClose(){
@@ -46,8 +48,14 @@ class BucketlistItem extends Component {
     let action = "Update " + item.name
     this.setState({
       value: item.name,
+      itemOnFocus: item,
     })
     this.formOpen(action)
+  }
+
+  updateBucketlistItem(details){
+    console.log(details)
+    console.log(this.props.items)
   }
 
   createBucketlistItem(name){
