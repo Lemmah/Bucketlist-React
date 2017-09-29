@@ -11,6 +11,7 @@ class BucketlistItem extends Component {
       action: "Default Form",
       value: "",
       itemOnFocus: null,
+      updatingResource: null,
     }
 
     this.formClose = this.formClose.bind(this);
@@ -20,6 +21,8 @@ class BucketlistItem extends Component {
     this.deleteItem = this.deleteBucketlistItem.bind(this);
     this.editItem = this.editBucketlistItem.bind(this);
     this.updateBucketlistItem = this.updateBucketlistItem.bind(this);
+    this.editBucketlist = this.editBucketlist.bind(this)
+    this.checkResourceUpdate = this.checkResourceUpdate.bind(this)
   }
 
   formClose(){
@@ -49,8 +52,18 @@ class BucketlistItem extends Component {
     this.setState({
       value: item.name,
       itemOnFocus: item,
+      updatingResource: "bucketlistItem",
     })
     this.formOpen(action)
+  }
+
+  checkResourceUpdate(details){
+    let resourceType = this.state.updatingResource;
+    if(resourceType === "bucketlistItem"){
+      this.updateBucketlistItem(details)
+    } else {
+      console.log("Bucketlist Update: ", details)
+    }
   }
 
   updateBucketlistItem(details){
@@ -58,8 +71,18 @@ class BucketlistItem extends Component {
     this.props.updateBucketlistItem(details, itemOnFocus)
     this.formClose()
     this.setState({
-      value: ""
+      value: "",
+      updatingResource: null,
     })
+  }
+
+  editBucketlist(){
+    const bucketlist = this.props.bucketlist
+    let action = "Update " + bucketlist.name
+    this.setState({
+      value: bucketlist.name,
+    })
+    this.formOpen(action)
   }
 
   createBucketlistItem(name){
@@ -81,6 +104,7 @@ class BucketlistItem extends Component {
         deleteBucketlist={this.deleteBucketlist}
         deleteItem={this.deleteItem}
         editItem={this.editItem}
+        editBucketlist={this.editBucketlist}
       />
     )
   }
@@ -95,7 +119,7 @@ class BucketlistItem extends Component {
           show={this.state.formShow} 
           onHide={this.formClose}
           onCreateResource={this.createBucketlistItem}
-          onUpdateResource={this.updateBucketlistItem}
+          onUpdateResource={this.checkResourceUpdate}
         />
       </div>
     )

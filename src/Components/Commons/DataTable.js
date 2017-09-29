@@ -14,6 +14,10 @@ class DataTable extends Component {
 		this.props.deleteItem(id)
 	}
 
+	editBucketlist(){
+		this.props.editBucketlist()
+	}
+
 	editItem(id){
 		this.props.editItem(id)
 	}
@@ -41,6 +45,7 @@ class DataTable extends Component {
             </button>{' '}
             <button
               className="btn btn-info btn-sm"
+              onClick={this.editBucketlist.bind(this)}
             >
             Edit Details
             </button>{' '}
