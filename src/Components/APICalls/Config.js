@@ -122,6 +122,18 @@ class Requests extends Component {
 			console.log(error.response)
 		})
 	}
+
+	editResource(resourceUrl, newDetails, token){
+		const headers = this.setHeaders(token)
+		const payload = newDetails
+		axios.put(apiUrl + resourceUrl, payload, headers)
+		.then((response) => {
+			console.log(response.data)
+		})
+		.catch((error) => {
+			console.log(error.response)
+		})
+	}
 }
 
 

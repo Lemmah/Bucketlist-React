@@ -8,6 +8,8 @@ class BucketlistItem extends Component {
     super(props);
     this.state = {
       formShow: false,
+      action: "Default Form",
+      value: "",
     }
 
     this.formClose = this.formClose.bind(this);
@@ -15,6 +17,7 @@ class BucketlistItem extends Component {
     this.createBucketlistItem = this.createBucketlistItem.bind(this);
     this.deleteBucketlist = this.deleteBucketlist.bind(this);
     this.deleteItem = this.deleteBucketlistItem.bind(this);
+    this.editItem = this.editBucketlistItem.bind(this);
   }
 
   formClose(){
@@ -23,8 +26,9 @@ class BucketlistItem extends Component {
     })
   }
 
-  formOpen(){
+  formOpen(action){
     this.setState({
+      action: action,
       formShow: true,
     })
   }
@@ -36,6 +40,14 @@ class BucketlistItem extends Component {
 
   deleteBucketlistItem(id){
     this.props.deleteBucketlistItem(id)
+  }
+
+  editBucketlistItem(item){
+    let action = "Update " + item.name
+    this.setState({
+      value: item.name,
+    })
+    this.formOpen(action)
   }
 
   createBucketlistItem(name){
@@ -50,12 +62,15 @@ class BucketlistItem extends Component {
   }
 
   displayBucketlistItem () {
-    return <DataTable 
-              {...this.props} 
-              formOpen={this.formOpen}
-              deleteBucketlist={this.deleteBucketlist}
-              deleteItem={this.deleteItem}
-            />
+    return (
+      <DataTable 
+        {...this.props} 
+        formOpen={this.formOpen}
+        deleteBucketlist={this.deleteBucketlist}
+        deleteItem={this.deleteItem}
+        editItem={this.editItem}
+      />
+    )
   }
 
   render () {
@@ -63,7 +78,8 @@ class BucketlistItem extends Component {
       <div>
         {this.displayBucketlistItem()}
         <ActionForm
-          action='Add Activity' 
+          value={this.state.value}
+          action={this.state.action} 
           show={this.state.formShow} 
           onHide={this.formClose}
           onCreateResource={this.createBucketlistItem}

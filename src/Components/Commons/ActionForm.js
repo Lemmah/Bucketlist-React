@@ -4,22 +4,38 @@ import { Modal, Button, Form } from 'react-bootstrap'
 
 class ActionForm extends Component {
 
-  createResource = (e) => {
+  doAction = (e) => {
     let resourceName = this.refs.resourceName.value;
-    this.props.onCreateResource(resourceName);
+    let action = this.props.action.toLowerCase(),
+        create = "create", add = "add";
+    (action.includes(create) || action.includes(add) ?
+      this.props.onCreateResource(resourceName)
+      :
+      console.log(action.toLowerCase())
+    )
     e.preventDefault();
   }
 
   render () {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide} bsSize='small' aria-labelledby='contained-modal-title-lg'>
-        <Form horizontal onSubmit={this.createResource.bind(this)}>
+      <Modal 
+        show={this.props.show}
+        onHide={this.props.onHide}
+        bsSize='small'
+        aria-labelledby='contained-modal-title-lg'
+      >
+        <Form horizontal
+          onSubmit={this.doAction.bind(this)}
+        >
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-lg'>{this.props.action}</Modal.Title>
+            <Modal.Title id='contained-modal-title-lg'>
+              {this.props.action}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <label>Name:</label>
-              <input 
+              <input
+                defaultValue={this.props.value}
                 type="text" 
                 className="form-control" 
                 ref="resourceName"

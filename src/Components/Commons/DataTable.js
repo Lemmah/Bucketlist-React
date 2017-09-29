@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 class DataTable extends Component {
 	
-	formOpen(){
-		this.props.formOpen()
+	formOpen(action){
+		this.props.formOpen(action)
 	}
 
 	deleteBucketlist(){
@@ -12,6 +12,10 @@ class DataTable extends Component {
 
 	deleteItem(id){
 		this.props.deleteItem(id)
+	}
+
+	editItem(id){
+		this.props.editItem(id)
 	}
 
 	tableHeader(){
@@ -31,7 +35,7 @@ class DataTable extends Component {
           <th>
             <button
               className="btn btn-success btn-sm"
-              onClick={this.formOpen.bind(this)}
+              onClick={this.formOpen.bind(this, "Add Activities")}
             >
             Add Activity
             </button>{' '}
@@ -86,6 +90,7 @@ class DataTable extends Component {
 	              <td>
 	                <button
 	                  className="btn btn-info btn-sm"
+	                  onClick={this.editItem.bind(this, bucketlistItem)}
 	                >
 	                Edit Details
 	                </button>{' '}
