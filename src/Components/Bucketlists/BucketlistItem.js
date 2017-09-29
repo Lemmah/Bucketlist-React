@@ -54,8 +54,9 @@ class BucketlistItem extends Component {
   }
 
   updateBucketlistItem(details){
-    console.log(details)
-    console.log(this.props.items)
+    const itemOnFocus = this.state.itemOnFocus
+    this.props.updateBucketlistItem(details, itemOnFocus)
+    this.formClose()
   }
 
   createBucketlistItem(name){
@@ -91,6 +92,7 @@ class BucketlistItem extends Component {
           show={this.state.formShow} 
           onHide={this.formClose}
           onCreateResource={this.createBucketlistItem}
+          onUpdateResource={this.updateBucketlistItem}
         />
       </div>
     )

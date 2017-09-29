@@ -24,6 +24,7 @@ class PageLayout extends Requests{
 		this.createBucketlistItem = this.createBucketlistItem.bind(this)
 		this.deleteBucketlist = this.deleteBucketlist.bind(this)
 		this.deleteBucketlistItem = this.deleteBucketlistItem.bind(this)
+		this.updateBucketlistItem = this.updateBucketlistItem.bind(this)
 	} 
 
 	componentWillReceiveProps(nextProps){
@@ -130,6 +131,18 @@ class PageLayout extends Requests{
 		this.deleteResource(resourceUrl, token)
 	}
 
+	updateBucketlistItem(details, itemOnFocus){
+		const items = this.state.items
+    const itemIndex = items.findIndex(item => item === itemOnFocus)
+    let targetItem = items[itemIndex]
+    targetItem.name = details
+    items.splice(itemIndex, 1)
+    items.splice(0,0,targetItem)
+    this.setState({
+    	items: items,
+    })
+	}
+
 	rowContent(){
 		if(this.props.authenticated){
 			return (
@@ -149,6 +162,7 @@ class PageLayout extends Requests{
 		      		createBucketlistItem={this.createBucketlistItem}
 		      		deleteBucketlist={this.deleteBucketlist}
 		      		deleteBucketlistItem={this.deleteBucketlistItem}
+		      		updateBucketlistItem={this.updateBucketlistItem}
 		      	/>
 		      </Col>
 		    </Row>

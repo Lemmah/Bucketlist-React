@@ -11,7 +11,7 @@ class ActionForm extends Component {
     (action.includes(create) || action.includes(add) ?
       this.props.onCreateResource(resourceName)
       :
-      console.log(action.toLowerCase())
+      this.props.onUpdateResource(resourceName)
     )
     e.preventDefault();
   }
