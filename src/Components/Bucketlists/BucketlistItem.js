@@ -57,6 +57,9 @@ class BucketlistItem extends Component {
     const itemOnFocus = this.state.itemOnFocus
     this.props.updateBucketlistItem(details, itemOnFocus)
     this.formClose()
+    this.setState({
+      value: ""
+    })
   }
 
   createBucketlistItem(name){

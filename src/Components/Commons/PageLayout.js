@@ -141,6 +141,11 @@ class PageLayout extends Requests{
     this.setState({
     	items: items,
     })
+    const token = this.state.token
+    const bucketlistId = this.state.bucketlistOnFocus.id
+    const resourceUrl = "/bucketlists/"+bucketlistId+"/items/"+targetItem.id
+    const newDetails = { name: details }
+    this.updateResource(resourceUrl, newDetails, token)
 	}
 
 	rowContent(){

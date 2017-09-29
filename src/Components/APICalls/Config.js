@@ -91,6 +91,7 @@ class Requests extends Component {
 		const token = this.state.authenticated.message.access_token;
 		const headers = this.setHeaders(token);
 		let payload = details;
+		console.log(payload)
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
 			(resourceType === 'bucketlist' ? 
@@ -123,14 +124,14 @@ class Requests extends Component {
 		})
 	}
 
-	editResource(resourceUrl, newDetails, token){
+	updateResource(resourceUrl, newDetails, token){
 		const headers = this.setHeaders(token)
 		const payload = newDetails
 		axios.put(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
 			console.log(response.data)
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.log(error.response)
 		})
 	}
