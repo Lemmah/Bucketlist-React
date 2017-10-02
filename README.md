@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Lemmah/bucketlist-react.svg?branch=master)](https://travis-ci.org/Lemmah/bucketlist-react) [![Coverage Status](https://coveralls.io/repos/github/Lemmah/bucketlist-react/badge.svg?branch=ft-crud-bucketlist-en-items)](https://coveralls.io/github/Lemmah/bucketlist-react?branch=ft-crud-bucketlist-en-items)
+[![Build Status](https://travis-ci.org/Lemmah/bucketlist-react.svg?branch=develop)](https://travis-ci.org/Lemmah/bucketlist-react) [![Coverage Status](https://coveralls.io/repos/github/Lemmah/bucketlist-react/badge.svg?branch=ft-crud-bucketlist-en-items)](https://coveralls.io/github/Lemmah/bucketlist-react?branch=ft-crud-bucketlist-en-items)
 
 # bucketlist-react
 
