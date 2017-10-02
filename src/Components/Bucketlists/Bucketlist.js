@@ -41,10 +41,6 @@ class Bucketlist extends Component{
 		});
 	}
 
-	hoverStyle(){
-		console.log("Hovered");
-	}
-
 	displayBucketlists(){
 		if(!this.props.bucketlists){
 			return(
@@ -100,7 +96,6 @@ class Bucketlist extends Component{
 						   return (
 						   	<tr 
 					   			style={{ cursor: "pointer" }}
-					   			onMouseOver={this.hoverStyle.bind(this)}
 					   			onClick={this.displayItems.bind(this, bucketlist)} 
 					   			key={bucketlist.id}
 					   			className="bucketlist"
@@ -136,3 +131,15 @@ class Bucketlist extends Component{
 }
 
 export default Bucketlist;
+
+
+/*
+DRY
+SRP
+Dashboard
+	Buckelist
+		receives bucketlists {}
+	BucketlistForm
+		create bucketlist
+
+*/
