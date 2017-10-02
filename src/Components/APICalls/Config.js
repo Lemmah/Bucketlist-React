@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 let axios = require('axios');
-const apiUrl = "http://localhost:5000";
+const apiUrl = "https://lemmah-bucketlist-api.herokuapp.com";
 const initialAppState = {
 			authenticated: false,
 			loginError: null,

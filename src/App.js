@@ -11,16 +11,6 @@ class App extends Requests {
     this.authenticate(endPoint, credentials)
   }
 
-  /* Remove this after I'm done with implementing
-   inner functionality
-  */
-  componentDidMount () {
-    const credentials = {
-      'email': 'jnlemayian@gmail.com',
-      'password': 'easyPass'
-    }
-    this.handleLogin(credentials)
-  }
 
   handleLogin (credentials) {
     this.resetState()
