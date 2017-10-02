@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ActionForm from './../Commons/ActionForm'
+import uuid from 'uuid'
 
 
 class Bucketlist extends Component{
@@ -39,10 +40,6 @@ class Bucketlist extends Component{
 		this.setState({
 			formShow: false,
 		});
-	}
-
-	hoverStyle(){
-		console.log("Hovered");
 	}
 
 	displayBucketlists(){
@@ -100,9 +97,8 @@ class Bucketlist extends Component{
 						   return (
 						   	<tr 
 					   			style={{ cursor: "pointer" }}
-					   			onMouseOver={this.hoverStyle.bind(this)}
 					   			onClick={this.displayItems.bind(this, bucketlist)} 
-					   			key={bucketlist.id}
+					   			key={uuid.v4()}
 					   			className="bucketlist"
 						   	>
 						   		<td>{bucketlist.name}</td><td></td>
@@ -136,3 +132,15 @@ class Bucketlist extends Component{
 }
 
 export default Bucketlist;
+
+
+/*
+DRY
+SRP
+Dashboard
+	Buckelist
+		receives bucketlists {}
+	BucketlistForm
+		create bucketlist
+
+*/
