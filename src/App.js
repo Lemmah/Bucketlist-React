@@ -1,88 +1,61 @@
-import React, { Component } from 'react';
-import './App.css';
-import NavigationBar from './Components/NavigationBar';
-import PageLayout from './Components/PageLayout';
-import Footer from './Components/Footer'
-import axios from 'axios';
+import React from 'react'
+import NavigationBar from './Components/Commons/NavigationBar'
+import PageLayout from './Components/Commons/PageLayout'
+import Footer from './Components/Commons/Footer'
+import Requests from './Components/APICalls/Config'
+
+class App extends Requests {
+  handleRegister (credentials) {
+    this.resetState()
+    const endPoint = '/auth/register'
+    this.authenticate(endPoint, credentials)
+  }
 
 
-const api_url = "http://localhost:5000";
-const initialAppState = {
-			authenticated: false,
-			loginError: null,
-			registrationError: null,
-		}
+  handleLogin (credentials) {
+    this.resetState()
+    const endPoint = '/auth/login'
+    this.authenticate(endPoint, credentials)
+  }
 
-class App extends Component {
-	constructor(props){
-		super(props);
-		this.state = initialAppState
-	}
+  handleLogout () {
+    this.resetState()
+  }
 
-	resetState(){
-		this.setState(initialAppState);
-	}
+  handleCreateBucketlist (resourceUrl, details) {
+    const resourceType = "bucketlist"
+    this.createResource(resourceType, resourceUrl, details)
+  }
 
-	handleRegister(credentials){
-		this.resetState();
-		axios.post(api_url + "/auth/register", credentials)
-    .then((response) => {
-      console.log(response.data);
-      this.handleLogin(credentials);
-    })
-    .catch((error) => {
-      console.log(error.response.data);
-      this.setState({
-      	registrationError: error.response.data.error,
-      	loginError: null,
-      	authenticated: false,
-      });
-    });
-	}
+  handleCreateBucketlistItem (resourceUrl, details) {
+    const resourceType = "bucketlistItem"
+    this.createResource(resourceType, resourceUrl, details)
+  }
 
-	handleLogin(credentials){
-		this.resetState();
-		axios.post(api_url + "/auth/login", credentials)
-    .then((response) => {
-      console.log(response.data.message);
-      this.setState({
-      	authenticated: response.data,
-      });
-    })
-    .catch((error) => {
-      console.log(error.response.data.error);
-      this.setState({
-      	loginError: error.response.data.error,
-      	registrationError: null,
-      	authenticated: false,
-      });
-    });
-	}
-
-	handleLogout(){
-		this.resetState();
-	}
-
-	render() {
-		return (
-		  <div className="App">
-		  	<NavigationBar
-		  		authenticated={this.state.authenticated}
-		  		onLogin={this.handleLogin.bind(this)}
-		  		loginError={this.state.loginError}
-		  		onLogout={this.handleLogout.bind(this)}
-		  	/>
-		  	<div className="container">
-			  	<PageLayout 
-			  		authenticated={this.state.authenticated}
-			  		onRegister={this.handleRegister.bind(this)}
-			  		registrationError={this.state.registrationError}
-			  	/>
-		  	</div>
-		  	<Footer />
-		  </div>
-		);
-	}
+  render () {
+    return (
+      <div className='App'>
+        <NavigationBar
+          authenticated={this.state.authenticated}
+          onLogin={this.handleLogin.bind(this)}
+          loginError={this.state.loginError}
+          onLogout={this.handleLogout.bind(this)}
+      />
+        <div className='container'>
+          <PageLayout
+            newBucketlist={this.state.newBucketlist}
+            newBucketlistItem={this.state.newBucketlistItem}
+            authenticated={this.state.authenticated}
+            onRegister={this.handleRegister.bind(this)}
+            registrationError={this.state.registrationError}
+            onCreateBucketlist={this.handleCreateBucketlist.bind(this)}
+            onCreateBucketlistItem={this.handleCreateBucketlistItem.bind(this)}
+        />
+        </div>
+        <Footer />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
