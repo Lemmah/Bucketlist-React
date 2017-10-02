@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Displays BucketlistItem without Crashing 1`] = `
+<div>
+  <table
+    className="table"
+  >
+    <thead>
+      <tr>
+        <th>
+          <h3>
+             Welcome, before you die? 
+          </h3>
+        </th>
+        <th>
+          Create Some Bucketlists
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+      >
+        <td>
+          Yo! Start making your life meaningful!
+        </td>
+        <td />
+      </tr>
+      <tr>
+        <td>
+          <br />
+        </td>
+        <td>
+          <br />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
