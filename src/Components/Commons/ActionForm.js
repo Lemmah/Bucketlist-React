@@ -52,7 +52,11 @@ class ActionForm extends Component {
               bsStyle="success"
               type="submit"
             >
-             {this.props.action.split(' ')[0]}
+             {(this.props.action ?
+              this.props.action.split(' ')[0]
+              :
+              "")
+              }
             </Button>
           </Modal.Footer>
         </Form>
