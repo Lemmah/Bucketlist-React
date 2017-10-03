@@ -1,21 +1,61 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import NavigationBar from './Components/Commons/NavigationBar'
+import PageLayout from './Components/Commons/PageLayout'
+import Footer from './Components/Commons/Footer'
+import Requests from './Components/APICalls/Config'
 
-class App extends Component {
-  render() {
+class App extends Requests {
+  handleRegister (credentials) {
+    this.resetState()
+    const endPoint = '/auth/register'
+    this.authenticate(endPoint, credentials)
+  }
+
+
+  handleLogin (credentials) {
+    this.resetState()
+    const endPoint = '/auth/login'
+    this.authenticate(endPoint, credentials)
+  }
+
+  handleLogout () {
+    this.resetState()
+  }
+
+  handleCreateBucketlist (resourceUrl, details) {
+    const resourceType = "bucketlist"
+    this.createResource(resourceType, resourceUrl, details)
+  }
+
+  handleCreateBucketlistItem (resourceUrl, details) {
+    const resourceType = "bucketlistItem"
+    this.createResource(resourceType, resourceUrl, details)
+  }
+
+  render () {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className='App'>
+        <NavigationBar
+          authenticated={this.state.authenticated}
+          onLogin={this.handleLogin.bind(this)}
+          loginError={this.state.loginError}
+          onLogout={this.handleLogout.bind(this)}
+      />
+        <div className='container'>
+          <PageLayout
+            newBucketlist={this.state.newBucketlist}
+            newBucketlistItem={this.state.newBucketlistItem}
+            authenticated={this.state.authenticated}
+            onRegister={this.handleRegister.bind(this)}
+            registrationError={this.state.registrationError}
+            onCreateBucketlist={this.handleCreateBucketlist.bind(this)}
+            onCreateBucketlistItem={this.handleCreateBucketlistItem.bind(this)}
+        />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Footer />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

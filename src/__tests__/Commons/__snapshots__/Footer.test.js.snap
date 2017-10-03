@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Displays footer without crashing 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "display": "block",
+        "height": "60px",
+        "padding": "20px",
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "backgroundColor": "#F8F8F8",
+        "borderTop": "1px solid #E7E7E7",
+        "bottom": "0",
+        "height": "60px",
+        "left": "0",
+        "padding": "20px",
+        "position": "fixed",
+        "textAlign": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <p>
+      © 2017 Lemayian - Dream Buckets. 
+    </p>
+  </div>
+</div>
+`;
