@@ -48,7 +48,6 @@ class Requests extends Component {
       }   
     })
     .catch((error) => {
-      console.log(error.response.data);
       let desiredEndPoint = endPoint,
       		resource = "register";
       if(desiredEndPoint.includes(resource)){
@@ -90,7 +89,6 @@ class Requests extends Component {
 		const token = this.state.authenticated.message.access_token;
 		const headers = this.setHeaders(token);
 		let payload = details;
-		console.log(payload)
 		axios.post(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
 			(resourceType === 'bucketlist' ? 
@@ -105,7 +103,7 @@ class Requests extends Component {
 				}))
 		})
 		.catch(error => {
-			console.log(error.response)
+			return error;
 		})
 	}
 
@@ -116,10 +114,10 @@ class Requests extends Component {
 		*/
 		axios.delete(apiUrl+resourceUrl, this.setHeaders(token))
 		.then((response) => {
-			console.log(response.data)
+			return response.data;
 		})
 		.catch((error) => {
-			console.log(error.response)
+			return error;
 		})
 	}
 
@@ -128,10 +126,10 @@ class Requests extends Component {
 		const payload = newDetails
 		axios.put(apiUrl + resourceUrl, payload, headers)
 		.then((response) => {
-			console.log(response.data)
+			return response.data;
 		})
 		.catch(error => {
-			console.log(error.response)
+			return error;
 		})
 	}
 }
