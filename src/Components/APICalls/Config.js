@@ -82,8 +82,7 @@ class Requests extends Component {
 			this.setState(configs);
 		})
 		.catch((error) => {
-			console.log(error.response.data.error);
-			return error.response.data;
+			return error;
 		})
 	}	
 

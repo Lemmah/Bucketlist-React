@@ -10,19 +10,13 @@ const dummyCredentials = {
 	"email" : "jnlemayian@gmail.com",
 	"password": "easyPassword", 
 }
+
 const dummyAuthenticationInfo = {
     "message": {
         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDcwMDkyMTcsImlhdCI6MTUwNzAwNTYxNywic3ViIjoxfQ.idObEdx7BfAOeKGmh8w80wk-hx5J-JhUgWbiYDqb1fE",
         "info": "You logged in successfully.",
         "user": "jnlemayian@gmail.com"
     }
-}
-
-const dummyProps = {
-	newBucketlist: null,
-	newBucketlistItem: null,
-	authenticated: {dummyAuthenticationInfo},
-	registrationError: null, 
 }
 
 const sampleBucketlists = [
@@ -60,6 +54,20 @@ const sampleItems = [
     }
 ]
 
+const dummyProps = {
+	newBucketlist: sampleBucketlists[1],
+	newBucketlistItem: sampleItems[1],
+	authenticated: dummyAuthenticationInfo,
+	registrationError: null, 
+}
+
+const dummyEmptyProps = {
+	newBucketlist: null,
+	newBucketlistItem: null,
+	authenticated: dummyAuthenticationInfo,
+	registrationError: null, 
+}
+
 it('Displays PageLayout without Crashing', () => {
 	const rendered = renderer.create(
 		<PageLayout />,
@@ -80,7 +88,13 @@ describe('Shows Dashboard if logged in', () => {
 	  />
 	);
 	const instance = wrapper.instance();
-	/* Set mounted state */
+
+	it('Does Set state when it Receives Props', () => {
+		instance.componentWillReceiveProps(dummyProps);
+		instance.componentWillReceiveProps(dummyEmptyProps);
+	})
+
+	/* Set mock Mounted state */
 	instance.setState({
 		token: dummyAuthenticationInfo.message.access_token,
 		user: dummyAuthenticationInfo.message.user,
@@ -93,6 +107,38 @@ describe('Shows Dashboard if logged in', () => {
 	it('Registers new User using Credentials', () => {
 		instance.registerUser(dummyCredentials);
 	});
+
+	it('Creates Bucketlists', () => {
+		const resourceUrl = '/bucketlists';
+		const details = {
+			'name' : 'Travel Round the World',
+		}
+		instance.createBucketlist(resourceUrl, details);
+	})
+
+	it('Creates Bucketlist Items', () => {
+		const resourceUrl = '/bucketlists/138/items';
+		const details = {
+			'name' : 'Travel to Russia',
+		}
+		instance.createBucketlistItem(resourceUrl, details);
+	})
+
+	it('Updates Bucketlist item', () => {
+		const details = "Travel to England";
+		const itemOnFocus = sampleItems[0];
+		instance.updateBucketlistItem(details, itemOnFocus);
+	});
+
+	it('Updates Bucketlist', () => {
+		const details = "Travelling Round the World";
+		instance.updateBucketlist(details);
+	});
+
+	it('Gets all Bucketlist items', () =>{
+		const bucketlist = sampleBucketlists[0];
+		instance.getAllBucketlistItems(bucketlist);
+	})
 
 	it('Deletes Bucketlist Item using Id', () => {
 		instance.deleteBucketlistItem(119);
