@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ActionForm from './../Commons/ActionForm'
+import uuid from 'uuid'
 
 
 class Bucketlist extends Component{
@@ -97,7 +98,7 @@ class Bucketlist extends Component{
 						   	<tr 
 					   			style={{ cursor: "pointer" }}
 					   			onClick={this.displayItems.bind(this, bucketlist)} 
-					   			key={bucketlist.id}
+					   			key={uuid.v4()}
 					   			className="bucketlist"
 						   	>
 						   		<td>{bucketlist.name}</td><td></td>

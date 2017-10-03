@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Displays BucketlistItem without Crashing 1`] = `
+exports[`<BucketlistItem /> Displays BucketlistItem without Crashing 1`] = `
 <div>
   <table
     className="table"

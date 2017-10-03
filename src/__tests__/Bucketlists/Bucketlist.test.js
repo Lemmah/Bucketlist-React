@@ -6,13 +6,30 @@ import Adapter from 'enzyme-adapter-react-15';
 configure({ adapter: new Adapter() });
 import { shallow, mount, render } from 'enzyme';
 
+const sampleBucketlists = [
+      {
+          "created_by": 1,
+          "date_created": "Mon, 02 Oct 2017 20:10:40 GMT",
+          "date_modified": "Mon, 02 Oct 2017 20:10:40 GMT",
+          "id": 138,
+          "name": "Lemmah"
+      },
+      {
+          "created_by": 1,
+          "date_created": "Mon, 02 Oct 2017 20:10:48 GMT",
+          "date_modified": "Mon, 02 Oct 2017 20:10:48 GMT",
+          "id": 139,
+          "name": "Lemmah22"
+      },
+      null
+  ]
 
 describe("<Bucketlist />", () => {
 	const wrapper = shallow(
 		<Bucketlist 
 			createBucketlist={() => {}}
 			getAllBucketlistItems={() => {}}
-			bucketlists={[null, 'Lemmah']}
+			bucketlists={sampleBucketlists}
 		/>
 		);
 	const instance = wrapper.instance();

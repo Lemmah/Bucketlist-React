@@ -29,6 +29,7 @@ class PageLayout extends Requests{
 	} 
 
 	componentWillReceiveProps(nextProps){
+		console.log(nextProps)
 		let bucketlists = this.state.bucketlists;
 		if(nextProps.newBucketlist){
 			if(!bucketlists) {
@@ -66,7 +67,7 @@ class PageLayout extends Requests{
 			if(this.state.bucketlists.length > 0){
 				if(this.state.firstFocus){
 					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
-					firstBucketlist.click();
+					(firstBucketlist ? firstBucketlist.click() : "");
 					this.setState({
 						firstFocus: false,
 					});
