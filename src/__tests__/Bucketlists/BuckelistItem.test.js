@@ -44,8 +44,7 @@ describe("<BucketlistItem />", () => {
 	const wrapper = mount(
 		<BucketlistItem 
 			bucketlist={dummyBucketlist}
-			items={dummyItems
-		}
+			items={dummyItems}
 			createBucketlistItem={() => {}}
   		deleteBucketlist={() => {}}
   		deleteBucketlistItem={() => {}}
