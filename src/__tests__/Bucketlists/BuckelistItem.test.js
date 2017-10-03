@@ -71,6 +71,7 @@ describe("<BucketlistItem />", () => {
 
 	it('Conditionally Renders Bucketlist Items', () => {
 		instance.displayBucketlistItem();
+		emptyInstance.displayBucketlistItem();
 	})
 
 	it('Opens the Modal for an Action', () => {
@@ -107,15 +108,15 @@ describe("<BucketlistItem />", () => {
 
 	it('Edits a bucketlist item', () => {
 		const item = dummyItems[0];
-		instance.editBucketlist(item);
-		const details = "Travel";
+		instance.editBucketlistItem(item);
+		const details = "Europe";
 		instance.checkResourceUpdate(details);
 	})
 
 	it('Edits a bucketlist', () => {
 		const bucketlist = dummyBucketlist;
-		instance.editBucketlistItem(bucketlist);
-		const details = "Europe";
+		instance.editBucketlist(bucketlist);
+		const details = "Travel";
 		instance.checkResourceUpdate(details);
 	})
 })
