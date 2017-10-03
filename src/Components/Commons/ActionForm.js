@@ -51,6 +51,7 @@ class ActionForm extends Component {
             <Button 
               bsStyle="success"
               type="submit"
+              id="actionButton"
             >
              {(this.props.action ?
               this.props.action.split(' ')[0]
