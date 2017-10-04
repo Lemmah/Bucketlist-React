@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, Button,
   HelpBlock, Popover, OverlayTrigger,
-  NavDropdown, MenuItem, FormGroup } from 'react-bootstrap'
-import FaGithub from 'react-icons/lib/fa/github'
+  NavDropdown, MenuItem, FormGroup } from 'react-bootstrap';
+import FaGithub from 'react-icons/lib/fa/github';
 
 
-class NavigationBar extends Component{
-
-  loginUser(event){
+class NavigationBar extends Component {
+  loginUser(event) {
     const credentials = {
       email: this.refs.email.value,
       password: this.refs.pass.value,
@@ -16,23 +15,23 @@ class NavigationBar extends Component{
     event.preventDefault();
   }
 
-  loginError(){
+  loginError() {
     const actionLink = {
-      textDecoration: "underline",
-      color: "blue",
-    }
+      textDecoration: 'underline',
+      color: 'blue',
+    };
     const loginErrorOptions = (
       <Popover id="loginErrorOptions" title="What Options?">
         <strong>1. Forgot Password? </strong>
-        Just <span style={actionLink}>reset</span> it.<br/>
+        Just <span style={actionLink}>reset</span> it.<br />
         <strong>2. New Here? </strong>
-        <span style={actionLink}>Signup</span> below.<br/>
+        <span style={actionLink}>Signup</span> below.<br />
         <strong>3. Application error? </strong>
-        Please <span style={actionLink}>report</span> it.<br/>
+        Please <span style={actionLink}>report</span> it.<br />
       </Popover>
     );
 
-    if(this.props.loginError){
+    if (this.props.loginError) {
       return (
         <HelpBlock
           style={{
@@ -41,76 +40,78 @@ class NavigationBar extends Component{
         >
           <span>{this.props.loginError}</span>.
            Don't panic, you still have{' '}
-          <OverlayTrigger 
+          <OverlayTrigger
             trigger="click"
-            placement="left" 
+            placement="left"
             overlay={loginErrorOptions}
           >
-            <span 
+            <span
               style={actionLink}
             >options</span>
           </OverlayTrigger>
         </HelpBlock>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 
-  showError(){
-    if(this.props.loginError){
-      return "error";
-    } else {
-      return null;
+  showError() {
+    if (this.props.loginError) {
+      return 'error';
     }
+    return null;
   }
 
-  logout(){
+  logout() {
     this.props.onLogout();
   }
 
-  chooseNavBar(){
-    if(this.props.authenticated){
+  chooseNavBar() {
+    if (this.props.authenticated) {
       return (
         <Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1}>
-                <FaGithub />
+              <FaGithub />
             </NavItem>
           </Nav>
           <Nav pullRight>
             <NavDropdown
-              eventKey={3} 
-              title={this.props.authenticated.message.user} 
+              eventKey={3}
+              title={this.props.authenticated.message.user}
               id="basic-nav-dropdown"
             >
               <MenuItem eventKey={3.1}>Change Password</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey={3.2} 
-              onClick={this.logout.bind(this)}>Logout</MenuItem>
+              <MenuItem
+                eventKey={3.2}
+                onClick={this.logout.bind(this)}
+              >Logout</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       );
-    } else {
-      return (
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1}><FaGithub /></NavItem>
-          </Nav>
-          <Navbar.Form pullRight>
-            <form onSubmit={this.loginUser.bind(this)}>
+    }
+    return (
+      <Navbar.Collapse>
+        <Nav>
+          <NavItem eventKey={1}><FaGithub /></NavItem>
+        </Nav>
+        <Navbar.Form pullRight>
+          <form onSubmit={this.loginUser.bind(this)}>
             <FormGroup validationState={this.showError()}>
               <input
                 className="form-control"
-                ref="email" type="email"
+                ref="email"
+                type="email"
                 placeholder="Enter Email"
                 required
               />
               {' '}
               <input
                 className="form-control"
-                ref="pass" type="password"
+                ref="pass"
+                type="password"
                 placeholder="Enter Password"
                 required
               />
@@ -119,14 +120,13 @@ class NavigationBar extends Component{
               {this.loginError()}
 
             </FormGroup>
-            </form>
-          </Navbar.Form>
-        </Navbar.Collapse>
-      );
-    }
+          </form>
+        </Navbar.Form>
+      </Navbar.Collapse>
+    );
   }
 
-  render(){
+  render() {
     return (
       <Navbar default collapseOnSelect>
         <Navbar.Header>
@@ -140,7 +140,6 @@ class NavigationBar extends Component{
     );
   }
 }
-
 
 
 export default NavigationBar;

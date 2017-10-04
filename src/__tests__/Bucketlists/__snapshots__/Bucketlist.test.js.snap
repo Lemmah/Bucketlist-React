@@ -3,7 +3,7 @@
 exports[`<Bucketlist /> Displays Bucketlist without Crashing 1`] = `
 <div>
   <table
-    className="table"
+    className="table table-hover table-sm table-striped"
   >
     <thead>
       <tr>

@@ -16,7 +16,7 @@
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
-      "arrowFunctions": false // enable arrow functions
+      "arrowFunctions": false
     },
     "sourceType": "module"
   },

@@ -1,6 +1,5 @@
 import { Component } from 'react';
-
-const axios = require('axios');
+import axios from 'axios';
 
 const apiUrl = 'https://lemmah-bucketlist-api.herokuapp.com';
 const initialAppState = {
@@ -24,49 +23,6 @@ class Requests extends Component {
     this.state = initialAppState;
   }
 
-  setHeaders(token) {
-    return {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      }
-    };
-  }
-
-  authenticate(endPoint, credentials) {
-    axios.post(apiUrl + endPoint, credentials)
-      .then((response) => {
-        let responseData = response.data.message,
-      		registrationMsg = 'registered successfully';
-        if (responseData.info === undefined) {
-      	if (responseData.includes(registrationMsg)) {
-	      	this.handleLogin(credentials);
-	      }
-        } else {
-      	this.setState({
-	      	authenticated: response.data,
-	      });
-        }
-      })
-      .catch((error) => {
-        let desiredEndPoint = endPoint,
-      		resource = 'register';
-        if (desiredEndPoint.includes(resource)) {
-	      this.setState({
-	      	registrationError: error.response.data.error,
-	      	loginError: null,
-	      	authenticated: false
-	      });
-	    } else {
-	    	this.setState({
-      	loginError: error.response.data.error,
-      	registrationError: null,
-      	authenticated: false,
-          });
-	    }
-      });
-  }
-
   getResource(resourceName, resourceUrl, token) {
     axios.get(apiUrl + resourceUrl, setHeaders(token))
       .then((response) => {
@@ -80,6 +36,40 @@ class Requests extends Component {
       .catch(error => error);
   }
 
+  authenticate(endPoint, credentials) {
+    axios.post(apiUrl + endPoint, credentials)
+      .then((response) => {
+        let responseData = response.data.message,
+          registrationMsg = 'registered successfully';
+        if (responseData.info === undefined) {
+          if (responseData.includes(registrationMsg)) {
+            this.handleLogin(credentials);
+          }
+        } else {
+          this.setState({
+            authenticated: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        let desiredEndPoint = endPoint,
+          resource = 'register';
+        if (desiredEndPoint.includes(resource)) {
+          this.setState({
+            registrationError: error.response.data.error,
+            loginError: null,
+            authenticated: false
+          });
+        } else {
+          this.setState({
+            loginError: error.response.data.error,
+            registrationError: null,
+            authenticated: false,
+          });
+        }
+      });
+  }
+
   resetState() {
     this.setState(initialAppState);
   }
@@ -90,6 +80,7 @@ class Requests extends Component {
     const payload = details;
     axios.post(apiUrl + resourceUrl, payload, headers)
       .then((response) => {
+        // eslint-disable-next-line
         (resourceType === 'bucketlist' ?
           this.setState({
             newBucketlist: response.data,
@@ -104,15 +95,16 @@ class Requests extends Component {
       .catch(error => error);
   }
 
-  // eslint-ignore-next-line
+  // eslint-disable-next-line
   deleteResource(resourceUrl, token) {
     axios.delete(apiUrl + resourceUrl, setHeaders(token))
       .then(response => response.data)
       .catch(error => error);
   }
 
+  // eslint-disable-next-line
   updateResource(resourceUrl, newDetails, token) {
-    const headers = this.setHeaders(token);
+    const headers = setHeaders(token);
     const payload = newDetails;
     axios.put(apiUrl + resourceUrl, payload, headers)
       .then(response => response.data)

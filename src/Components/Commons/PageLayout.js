@@ -28,7 +28,6 @@ class PageLayout extends Requests{
 	} 
 
 	componentWillReceiveProps(nextProps){
-		console.log(nextProps)
 		let bucketlists = this.state.bucketlists;
 		if(nextProps.newBucketlist){
 			if(!bucketlists) {
@@ -66,6 +65,7 @@ class PageLayout extends Requests{
 			if(this.state.bucketlists.length > 0){
 				if(this.state.firstFocus){
 					let firstBucketlist = document.getElementsByClassName("bucketlist")[0];
+					// eslint-disable-next-line
 					(firstBucketlist ? firstBucketlist.click() : "");
 					this.setState({
 						firstFocus: false,
@@ -160,7 +160,7 @@ class PageLayout extends Requests{
 		const token = this.state.token
 		const resourceUrl = "/bucketlists/"+targetBucketlistId
 		const newDetails = { name: details }
-		this.updateResource(resourceUrl, newDetails, token)
+		this.updateResource(resourceUrl, newDetails, token);
 	}
 
 	rowContent(){

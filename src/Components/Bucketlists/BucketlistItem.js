@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import ActionForm from './../Commons/ActionForm'
-import DataTable from './../Commons/DataTable'
+import React, { Component } from 'react';
+import ActionForm from './../Commons/ActionForm';
+import DataTable from './../Commons/DataTable';
 
 
 class BucketlistItem extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       formShow: false,
-      action: "Default Form",
-      value: "",
+      action: 'Default Form',
+      value: '',
       itemOnFocus: null,
       updatingResource: null,
-    }
+    };
 
     this.formClose = this.formClose.bind(this);
     this.formOpen = this.formOpen.bind(this);
@@ -26,115 +26,115 @@ class BucketlistItem extends Component {
     this.updateBucketlist = this.updateBucketlist.bind(this);
   }
 
-  formClose(){
+  formClose() {
     this.setState({
       formShow: false,
-    })
+    });
   }
 
-  formOpen(action){
+  formOpen(action) {
     this.setState({
-      action: action,
+      action,
       formShow: true,
-    })
+    });
   }
 
-  deleteBucketlist(){
-    const bucketlistId = this.props.bucketlist.id
-    this.props.deleteBucketlist(bucketlistId)
+  deleteBucketlist() {
+    const bucketlistId = this.props.bucketlist.id;
+    this.props.deleteBucketlist(bucketlistId);
   }
 
-  deleteBucketlistItem(id){
-    this.props.deleteBucketlistItem(id)
+  deleteBucketlistItem(id) {
+    this.props.deleteBucketlistItem(id);
   }
 
-  editBucketlistItem(item){
-    let action = "Update " + item.name
+  editBucketlistItem(item) {
+    const action = `Update ${item.name}`;
     this.setState({
       value: item.name,
       itemOnFocus: item,
-      updatingResource: "bucketlistItem",
-    })
-    this.formOpen(action)
+      updatingResource: 'bucketlistItem',
+    });
+    this.formOpen(action);
   }
 
-  checkResourceUpdate(details){
-    let resourceType = this.state.updatingResource;
-    if(resourceType === "bucketlistItem"){
-      this.updateBucketlistItem(details)
+  checkResourceUpdate(details) {
+    const resourceType = this.state.updatingResource;
+    if (resourceType === 'bucketlistItem') {
+      this.updateBucketlistItem(details);
     } else {
-      this.updateBucketlist(details)
+      this.updateBucketlist(details);
     }
   }
 
-  updateBucketlistItem(details){
-    const itemOnFocus = this.state.itemOnFocus
-    this.props.updateBucketlistItem(details, itemOnFocus)
-    this.formClose()
+  updateBucketlistItem(details) {
+    const itemOnFocus = this.state.itemOnFocus;
+    this.props.updateBucketlistItem(details, itemOnFocus);
+    this.formClose();
     this.setState({
-      value: "",
+      value: '',
       updatingResource: null,
-    })
+    });
   }
 
-  editBucketlist(){
-    const bucketlist = this.props.bucketlist
-    let action = "Update " + bucketlist.name
+  editBucketlist() {
+    const bucketlist = this.props.bucketlist;
+    const action = `Update ${bucketlist.name}`;
     this.setState({
       value: bucketlist.name,
-      updatingResource: "bucketlist",
-    })
-    this.formOpen(action)
+      updatingResource: 'bucketlist',
+    });
+    this.formOpen(action);
   }
 
-  updateBucketlist(details){
-    this.props.updateBucketlist(details)
-    this.formClose()
+  updateBucketlist(details) {
+    this.props.updateBucketlist(details);
+    this.formClose();
     this.setState({
-      value: "",
+      value: '',
       updatingResource: null,
-    })
+    });
   }
 
-  createBucketlistItem(name){
-    const resourceUrl = "/bucketlists/"+this.props.bucketlist.id+"/items"
-    let details = {
-      "name": name,
-    }
-    this.props.createBucketlistItem(resourceUrl, details)
+  createBucketlistItem(name) {
+    const resourceUrl = `/bucketlists/${this.props.bucketlist.id}/items`;
+    const details = {
+      name,
+    };
+    this.props.createBucketlistItem(resourceUrl, details);
     this.setState({
       formShow: false,
-    })
+    });
   }
 
-  displayBucketlistItem () {
+  displayBucketlistItem() {
     return (
-      <DataTable 
-        {...this.props} 
+      <DataTable
+        {...this.props}
         formOpen={this.formOpen}
         deleteBucketlist={this.deleteBucketlist}
         deleteItem={this.deleteItem}
         editItem={this.editItem}
         editBucketlist={this.editBucketlist}
       />
-    )
+    );
   }
 
-  render () {
+  render() {
     return (
       <div>
         {this.displayBucketlistItem()}
         <ActionForm
           value={this.state.value}
-          action={this.state.action} 
-          show={this.state.formShow} 
+          action={this.state.action}
+          show={this.state.formShow}
           onHide={this.formClose}
           onCreateResource={this.createBucketlistItem}
           onUpdateResource={this.checkResourceUpdate}
         />
       </div>
-    )
+    );
   }
 }
 
-export default BucketlistItem
+export default BucketlistItem;
