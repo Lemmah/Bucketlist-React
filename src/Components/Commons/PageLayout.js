@@ -25,7 +25,6 @@ class PageLayout extends Requests{
 		this.deleteBucketlist = this.deleteBucketlist.bind(this)
 		this.deleteBucketlistItem = this.deleteBucketlistItem.bind(this)
 		this.updateBucketlistItem = this.updateBucketlistItem.bind(this)
-		this.updateBucketlist = this.updateBucketlist.bind(this)
 	} 
 
 	componentWillReceiveProps(nextProps){
@@ -150,7 +149,7 @@ class PageLayout extends Requests{
     this.updateResource(resourceUrl, newDetails, token)
 	}
 
-	updateBucketlist(details){
+	updateBucketlist = (details) => {
 		const targetBucketlistId = this.state.bucketlistOnFocus.id
 		const bucketlists = this.state.bucketlists
 		const targetIndex = bucketlists.findIndex(bucketlist => bucketlist.id === targetBucketlistId)
