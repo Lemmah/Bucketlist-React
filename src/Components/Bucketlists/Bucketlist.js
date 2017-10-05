@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import React, { Component } from 'react';
 import ActionForm from './../Commons/ActionForm';
 import FilteredList from './../Search/FilterList';
@@ -89,26 +88,7 @@ class Bucketlist extends Component {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {this.props.bucketlists.map((bucketlist) => {
-              if (!bucketlist) {
-                return null;
-              }
-              return (
-                <tr
-                  style={{ cursor: 'pointer' }}
-                  onClick={this.displayItems.bind(this, bucketlist)}
-                  key={uuid.v4()}
-                  className="bucketlist"
-                >
-                  <td>{bucketlist.name}</td><td />
-                </tr>);
-            })}
-            <tr>
-              <td><br /></td>
-              <td><br /></td>
-            </tr>
-          </tbody>
+          <tbody />
         </table>
         <FilteredList
           formOpen={this.formOpen}

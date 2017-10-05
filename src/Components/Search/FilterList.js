@@ -19,15 +19,17 @@ class FilteredList extends Component {
     this.setState({ items: updatedList });
   }
 
+  displayItems = (bucketlist) => {
+    this.props.displayItems(bucketlist);
+  }
+
   componentWillMount(){
-    console.log("Will Mount", this.props.bucketlists);
     this.setState({
       initialItems: this.props.bucketlists,
     });
   }
 
   componentDidMount () {
-    console.log("Did Mount", this.state.initialItems);
     this.setState({ items: this.state.initialItems })
   }
 
@@ -39,7 +41,10 @@ class FilteredList extends Component {
             <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.filterList} />
           </div>
         </form>
-        <List items={this.state.items} />
+        <List 
+          items={this.state.items}
+          displayItems={this.displayItems}
+        />
       </div>
     );
   }
