@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid';
 
 /*
  * Will receive items in the props
@@ -10,8 +11,8 @@ const List = props => (
         (<li
           className="list-group-item"
           data-category={item}
-          key={item}
-        >{item}</li>))
+          key={uuid.v4()}
+        >{item.name}</li>))
     }
   </ul>
 );

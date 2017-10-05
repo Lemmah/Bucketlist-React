@@ -5,17 +5,7 @@ class FilteredList extends Component {
   constructor () {
     super();
     this.state = {
-      initialItems: [
-        "Apples",
-        "Broccoli",
-        "Chicken",
-        "Duck",
-        "Eggs",
-        "Fish",
-        "Granola",
-        "Hash Browns",
-        "aaaapp"
-      ],
+      initialItems: [],
       items: []
     }
   }
@@ -23,13 +13,21 @@ class FilteredList extends Component {
   filterList = (event) => {
     var updatedList = this.state.initialItems;
     updatedList = updatedList.filter((item) => {
-      return item.toLowerCase().search(
+      return item.name.toLowerCase().search(
         event.target.value.toLowerCase()) !== -1;
     });
     this.setState({ items: updatedList });
   }
 
+  componentWillMount(){
+    console.log("Will Mount", this.props.bucketlists);
+    this.setState({
+      initialItems: this.props.bucketlists,
+    });
+  }
+
   componentDidMount () {
+    console.log("Did Mount", this.state.initialItems);
     this.setState({ items: this.state.initialItems })
   }
 
@@ -46,3 +44,5 @@ class FilteredList extends Component {
     );
   }
 }
+
+export default FilteredList;

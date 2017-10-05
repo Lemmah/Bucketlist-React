@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import React, { Component } from 'react';
 import ActionForm from './../Commons/ActionForm';
+import FilteredList from './../Search/FilterList';
 
 
 class Bucketlist extends Component {
@@ -13,6 +14,7 @@ class Bucketlist extends Component {
     this.formClose = this.formClose.bind(this);
     this.formOpen = this.formOpen.bind(this);
     this.createBucketlist = this.createBucketlist.bind(this);
+    this.displayItems = this.displayItems.bind(this);
   }
 
   formClose() {
@@ -73,40 +75,47 @@ class Bucketlist extends Component {
       );
     }
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Your Bucketlists</th>
-            <th>
-              <button
-                className="btn btn-success btn-xs"
-                onClick={this.formOpen}
-              >Create New
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.bucketlists.map((bucketlist) => {
-            if (!bucketlist) {
-              return null;
-            }
-            return (
-              <tr
-                style={{ cursor: 'pointer' }}
-                onClick={this.displayItems.bind(this, bucketlist)}
-                key={uuid.v4()}
-                className="bucketlist"
-              >
-                <td>{bucketlist.name}</td><td />
-              </tr>);
-          })}
-          <tr>
-            <td><br /></td>
-            <td><br /></td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Your Bucketlists</th>
+              <th>
+                <button
+                  className="btn btn-success btn-xs"
+                  onClick={this.formOpen}
+                >Create New
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.bucketlists.map((bucketlist) => {
+              if (!bucketlist) {
+                return null;
+              }
+              return (
+                <tr
+                  style={{ cursor: 'pointer' }}
+                  onClick={this.displayItems.bind(this, bucketlist)}
+                  key={uuid.v4()}
+                  className="bucketlist"
+                >
+                  <td>{bucketlist.name}</td><td />
+                </tr>);
+            })}
+            <tr>
+              <td><br /></td>
+              <td><br /></td>
+            </tr>
+          </tbody>
+        </table>
+        <FilteredList
+          formOpen={this.formOpen}
+          bucketlists={this.props.bucketlists}
+          displayItems={this.displayItems}
+        />
+      </div>
     );
   }
 
