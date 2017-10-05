@@ -61,7 +61,8 @@ class Bucketlist extends Component {
           <tbody>
             <tr>
               <td>No Bucketlists -</td>
-              <td>Start by creating some.</td>
+              <td>Start by creating some.
+              </td>
             </tr>
             <tr>
               <td><br /></td>
